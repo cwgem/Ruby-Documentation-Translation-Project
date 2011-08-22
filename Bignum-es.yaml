@@ -1,0 +1,233 @@
+--- 
+:name: Bignum
+:comment: |-
+  Un objeto Bignum contiene enteros cuya dimensión excede el rango de
+  Fixnum. Los Bignms se crean automáticamente cuando el resultado de
+  operaciones con enteros supera el tamaño de Fixnum, lo cuàl provocaría
+  un volcado de pila (overflow). Por otro lado, si una operación de Bignum
+  devuelve un objeto que cabe dentro del rango Fixnum, se convierte solo.
+
+  Para operaciones entre bits y <code>[]</code>, un Bignum se trata como 
+  una cadena de bits de largo infinito representada en complemento a 2.
+
+  Cuando se asigna un objeto Bignum, se asigna una refencia al objeto y no
+  el objeto en si mismo, a diferencia de los Fixnum.
+  
+:instance_methods: 
+- :name: to_s
+  :arglist: big.to_s(base=10)   ->  string
+  :comment: |-
+    Devuelve una cadena conteniendo una representación de <i>big</i> en
+	la base indica <i>base</i>.
+    
+       12345654321.to_s         #=> "12345654321"
+       12345654321.to_s(2)      #=> "1011011111110110111011110000110001"
+       12345654321.to_s(8)      #=> "133766736061"
+       12345654321.to_s(16)     #=> "2dfdbbc31"
+       78546939656932.to_s(36)  #=> "rubyrules"
+- :name: coerce
+  :arglist: coerce(p1)
+  :comment: "Falta documentación"
+- :name: -@
+  :arglist: -big   ->  integer
+  :comment: |-
+    Operador de negación unario. Se aplica sobre el Bignum 
+	y devuelve un entero cuyo valor es 0-big
+- :name: +
+  :arglist: big + otro  -> Numeric
+  :comment: |-
+	Suma big y otro, convierte automáticamente,
+	la clase del resultado.
+- :name: "-"
+  :arglist: big - otro  -> Numeric
+  :comment: Resta big y otro, devuelve el resultado.
+- :name: "*"
+  :arglist: big * otro  -> Numeric
+  :comment: Multiplica big y otro, devuelve el resultado.
+- :name: /
+  :arglist: big / otro     -> Numeric
+  :comment: |-
+    Divide big entre otro, la clase del resultado depende de la clase
+	<code>numeric</code> y de la magnitud del resultado.
+- :name: "%"
+  :arglist: |-
+    big % otro         -> Numeric
+    big.modulo(otro)   -> Numeric
+  :comment: |-
+    Devuelve el resto de la división entera entre big y otro. 
+	Véase: Numeric.divmod para más información.
+- :name: div
+  :arglist: big.div(otro)  -> integer
+  :comment: Efectúa la division entera y devuelve un valor entero.
+- :name: divmod
+  :arglist: big.divmod(número)   -> array
+  :comment: Véase <code>Numeric#divmod</code>.
+- :name: modulo
+  :arglist: |-
+    big % otro         -> Numeric
+    big.modulo(otro)   -> Numeric
+  :comment: |-
+    Devuelve el resto de la división entera entre big y otro. 
+	Véase: Numeric.divmod para más información.
+- :name: remainder
+  :arglist: big.remainder(numero)    -> Numeric
+  :comment: |-
+    Devuelve el resto de la división entera de <i>big</i> 
+	entre <i>numero</i>.
+    
+       -1234567890987654321.remainder(13731)      #=> -6966
+       -1234567890987654321.remainder(13731.24)   #=> -9906.22531493148
+- :name: fdiv
+  :arglist: big.fdiv(número) -> Float
+  :comment: |-
+    Devuelve el resultado de la división de <i>big</i> entre <i>número</i>
+	en punto flotante y precisión Float.
+    
+       -1234567890987654321.fdiv(13731)      #=> -89910996357705.5
+       -1234567890987654321.fdiv(13731.24)   #=> -89909424858035.7
+- :name: "**"
+  :arglist: big ** exponente   -> Numeric
+  :comment: |-
+    Eleva _big_ a la potencia _exponente_ (puede ser un entero, punto 
+	flotante u otro tipo que se convierta forzado a numérico. La clase
+	resultante puede ser: Fixnum, Bignum, or Float
+    
+      123456789 ** 2      #=> 15241578750190521
+      123456789 ** 1.2    #=> 5126464716.09932
+      123456789 ** -2     #=> 6.5610001194102e-17
+- :name: "&"
+  :arglist: big & número   ->  integer
+  :comment: Operación +and+ lógico bit a bit entre _big_ y _número_.
+- :name: "|"
+  :arglist: big | numeric   ->  integer
+  :comment: Operación +or+ lógico bit a bit entre _big_ y _número_.
+- :name: ^
+  :arglist: big ^ numeric   ->  integer
+  :comment: |- 
+    Operación +exclusive or+ (excluyente) lógico bit a bit 
+	entre _big_ y _número_.
+- :name: "~"
+  :arglist: ~big  ->  Integer
+  :comment: |-
+    Invierte los bits de big. Dado que Bignum son conceptualmente
+	infinitos, el resultado asume que tiene un nùmero infinito de
+	bits a la izquierda.
+	En representación hexadecimal, esto se muestra con 2 puntos 
+	suspensivos a la izquierda de los dígitos.
+	
+      sprintf("%X", ~0x1122334455)    #=> "..FEEDDCCBBAA"
+- :name: "<<"
+  :arglist: big << n   ->  Integer
+  :comment: |-
+    Corre(shift) big a la izquierda _n_ posiciones.
+    A la derecha si _n_ es negativo.
+- :name: ">>"
+  :arglist: big >> n   ->  Integer
+  :comment: |-
+    Corre(shift) big a la derecha _n_ posiciones.
+    A la izquierda si _n_ es negativo.
+- :name: "[]"
+  :arglist: big[n] -> 0, 1
+  :comment: |-
+    Referencia de Bits---Devuelve el <em>n</em>simo bit en la 
+	representación binaria de _big_, siendo <i>big</i>[0] el bit
+	menos significativo.
+    
+       a = 9**15
+       50.downto(0) do |n|
+         print a[n]
+       end
+    
+    <em>Muestra:</em>
+    
+       000101110110100000111000011110010100111100010111001
+- :name: <=>
+  :arglist: big <=> numero   -> -1, 0, +1 ó nil
+  :comment: |-
+	Comparación --- Devuelve -1, 0 ó +1 según si _big_ es mayor, igual 
+	o menor que _numero_. Esta comparación se usa para la clase 
+	<code>Comparable</code>. Devuelve nil si numero no es comparable.
+	
+		461451451435143 <==> nil 		# devuelve nil
+- :name: ==
+  :arglist: big == obj  -> true o false
+  :comment: |-
+    Devuelve <code>true</code> si <i>obj</i> contiene el mismo valor que
+    <i>big</i>. A diferencia de <code>Bignum#eql?</code>, este método
+    no require que <i>obj</i> sea <code>Bignum</code>.
+    
+       68719476736 == 68719476736.0   #=> true
+- :name: ">"
+  :arglist: big > real  ->  true ó false
+  :comment: |-
+    Devuelve <i>true</i> si el valor de <code>big</code> es
+    mayor que <code>real</code>, de lo contrario es <i>false</i>.
+- :name: ">="
+  :arglist: big >= real  ->  true ó false
+  :comment: |-
+    Devuelve <code>true</code> si el valor de <code>big</code> es
+    mayor igual que el argumento _real_.
+- :name: <
+  :arglist: big < real  ->  true ó false
+  :comment: |-
+    Devuelve <code>true</code> si el valor de <code>big</code> es
+    menor que <code>real</code>.
+- :name: <=
+  :arglist: big <= real  ->  true ó false
+  :comment: |-
+    Devuelve <code>true</code> si <code>big</code> es
+    menor o igual que <code>real</code>.
+- :name: ===
+  :arglist: big == obj  -> true ó false
+  :comment: |-
+    Devuelve <code>true</code> si <i>obj</i> es igual a <i>big</i>. 
+	A diferencia de <code>Bignum#eql?</code>, 
+    no require que <i>obj</i> se de la clase <code>Bignum</code>, realiza
+	las conversiones de tipo correspondiente.
+	Véase también: <code>Bignum#eql?</code>
+    
+       68719476736 == 68719476736.0   #=> true
+- :name: eql?
+  :arglist: big.eql?(obj)   -> true ó false
+  :comment: |-
+    Devuelve <code>true</code> sólo si <i>obj</i> es 
+    <code>Bignum</code> con el mismo valor que <i>big</i>. 
+	A diferncia de <code>Bignum#==</code>, no convierte tipos.
+    
+       68719476736.eql?(68719476736.0)   #=> false
+- :name: hash
+  :arglist: big.hash   -> fixnum
+  :comment: Calcula un valor de hash en base a _big_.
+- :name: to_f
+  :arglist: big.to_f -> float
+  :comment: |-
+    Convierte <i>big</i> a punto flotante <code>Float</code>. 
+	Si <i>big</i> no cabe en un <code>Float</code>, devuelve infinito.
+- :name: abs
+  :arglist: big.abs -> aBignum
+  :comment: |-
+    Devuelve el valor absoluto de <i>big</i>.
+    
+       -1234567890987654321.abs   #=> 1234567890987654321
+- :name: magnitude
+  :arglist: big.abs -> aBignum
+  :comment: |-
+    Devuelve el valor absoluto de <i>big</i>.
+    
+       -1234567890987654321.abs   #=> 1234567890987654321
+- :name: size
+  :arglist: big.size -> integer
+  :comment: |-
+    Devuelve el número de bytes de la representación de <i>big</i>.
+    
+       (256**10 - 1).size   #=> 12
+       (256**20 - 1).size   #=> 20
+       (256**40 - 1).size   #=> 40
+- :name: odd?
+  :arglist: big.odd? -> true ó false
+  :comment: Devuelve <code>true</code> si <i>big</i> es impar.
+- :name: even?
+  :arglist: big.even? -> true ó false
+  :comment: Devuelve <code>true</code> si <i>big</i> es par.
+:class_methods: []
+
