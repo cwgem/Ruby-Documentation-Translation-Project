@@ -3,15 +3,15 @@
 :comment: |-
   Un objeto Bignum contiene enteros cuya dimensión excede el rango de
   Fixnum. Los Bignms se crean automáticamente cuando el resultado de
-  operaciones con enteros supera el tamaño de Fixnum, lo cuàl provocaría
+  operaciones con enteros supera el tamaño de Fixnum, lo cual provocaría
   un volcado de pila (overflow). Por otro lado, si una operación de Bignum
   devuelve un objeto que cabe dentro del rango Fixnum, se convierte solo.
 
   Para operaciones entre bits y <code>[]</code>, un Bignum se trata como 
   una cadena de bits de largo infinito representada en complemento a 2.
 
-  Cuando se asigna un objeto Bignum, se asigna una refencia al objeto y no
-  el objeto en si mismo, a diferencia de los Fixnum.
+  Cuando se asigna un objeto Bignum, se asigna una referencia al objeto y no
+  el objeto en sí mismo, a diferencia de los Fixnum.
   
 :instance_methods: 
 - :name: to_s
