@@ -142,9 +142,9 @@
     ary.first     ->   obj or nil
     ary.first(n)  ->   new_ary
   :comment: |-
-    Returns the first element, or the first +n+ elements, of the array.
-    If the array is empty, the first form returns <code>nil</code>, and the
-    second form returns an empty array.
+    Retorna el primer elemento, o los primeros +n+ elementos, del arreglo.
+    Si el arreglo está vacío, el primer formulario retorna <code>nil</code>, y el
+    segundo formulario returna un arreglo vacío.
     
        a = [ "q", "r", "s", "t" ]
        a.first     #=> "q"
@@ -154,8 +154,8 @@
     ary.last     ->  obj or nil
     ary.last(n)  ->  new_ary
   :comment: |-
-    Returns the last element(s) of +self+. If the array is empty,
-    the first form returns <code>nil</code>.
+    Retorna el último o últimos elementos de +self+. Si el arreglo está vacío,
+    el primer formulario retorna <code>nil</code>.
     
        a = [ "w", "x", "y", "z" ]
        a.last     #=> "z"
@@ -163,24 +163,24 @@
 - :name: concat
   :arglist: ary.concat(other_ary)   -> ary
   :comment: |-
-    Appends the elements of <i>other_ary</i> to +self+.
+    Añade los elementos de <i>other_ary</i> a +self+.
     
        [ "a", "b" ].concat( ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
 - :name: "<<"
   :arglist: ary << obj            -> ary
   :comment: |-
-    Append---Pushes the given object on to the end of this array. This
-    expression returns the array itself, so several appends
-    may be chained together.
+    Añade---Empuja el objeto dado hasta el final de este arreglo. Esta
+    expresión devuelve el propio arreglo, así muchos añadidos
+    pueden concatenarse juntos.
     
        [ 1, 2 ] << "c" << "d" << [ 3, 4 ]
                #=>  [ 1, 2, "c", "d", [ 3, 4 ] ]
 - :name: push
   :arglist: ary.push(obj, ... )   -> ary
   :comment: |-
-    Append---Pushes the given object(s) on to the end of this array. This
-    expression returns the array itself, so several appends
-    may be chained together.
+    Añade---Empuja los objetos dados hasta el final de este arreglo. Esta
+    expresión devuelve el propio arreglo, así muchos añadidos
+    pueden concatenarse juntos.
     
        a = [ "a", "b", "c" ]
        a.push("d", "e", "f")
@@ -190,11 +190,11 @@
     ary.pop    -> obj or nil
     ary.pop(n) -> new_ary
   :comment: |-
-    Removes the last element from +self+ and returns it, or
-    <code>nil</code> if the array is empty.
+    Borra el último elemento de +self+ y lo devuelve, o
+    regresa <code>nil</code> si el arreglo está vacío.
     
-    If a number _n_ is given, returns an array of the last n elements
-    (or less) just like <code>array.slice!(-n, n)</code> does.
+    Si un número _n_ es dado, retorna un arreglo de los últimos n elementos
+    (o menos) así como lo hace <code>array.slice!(-n, n)</code>.
     
        a = [ "a", "b", "c", "d" ]
        a.pop     #=> "d"
