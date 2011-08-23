@@ -4,7 +4,7 @@
   Los arreglos son colecciones ordenadas de enteros-indexados de cualquier objeto.
   El índice de un arreglo comienza en 0, como en C o Java. Un índice negativo es
   asumido como el valor relativo desde el final del arreglo---esto es, un índice de -1
-  indica el último elemento del arreglo, -2 es el siguiente al último
+  indica el último elemento del arreglo, -2 es penúltimo
   elemento en el arreglo, y así sucesivamente.
 :instance_methods: 
 - :name: initialize_copy
@@ -89,16 +89,16 @@
     ary[start, length] = obj or other_ary or nil  ->  obj or other_ary or nil
     ary[range]         = obj or other_ary or nil  ->  obj or other_ary or nil
   :comment: |-
-    Element Assignment---Sets the element at _index_,
-    or replaces a subarray starting at _start_ and
-    continuing for _length_ elements, or replaces a subarray
-    specified by _range_.  If indices are greater than
-    the current capacity of the array, the array grows
-    automatically. A negative indices will count backward
-    from the end of the array. Inserts elements if _length_ is
-    zero. An +IndexError+ is raised if a negative index points
-    past the beginning of the array. See also
-    <code>Array#push</code>, and <code>Array#unshift</code>.
+    Asignación de Elemento---Coloca el elemento en el _index_,
+    o reemplaza un sub-arreglo que comienza en _start_ y
+    continúa para _length_ elementos, o reemplaza un sub-arreglo
+    especificado por el _range_. Si los índices son más grandes que
+    la capacidad actual del arreglo, los arreglos crecerán
+    automáticamente. Un índice negativo contará hacia atrás
+    desde el final del arreglo. Se insertan elementos si _length_ es
+    cero. Un +IndexError+ se produce si un índice negativo apunta
+    más allá del principio del arreglo. Vea también
+    <code>Array#push</code>, y <code>Array#unshift</code>.
     
        a = Array.new
        a[4] = "4";                 #=> [nil, nil, nil, nil, "4"]
@@ -112,9 +112,9 @@
 - :name: at
   :arglist: ary.at(index)   ->   obj  or nil
   :comment: |-
-    Returns the element at _index_. A
-    negative index counts from the end of +self+.  Returns +nil+
-    if the index is out of range. See also <code>Array#[]</code>.
+    Retorna el elemento en _index_. Un
+    índice negativo cuenta desde el final de +self+. Retorna +nil+
+    si el índice está fuera del rango. Vea también <code>Array#[]</code>.
     
        a = [ "a", "b", "c", "d", "e" ]
        a.at(0)     #=> "a"
@@ -125,12 +125,12 @@
     ary.fetch(index, default )          -> obj
     ary.fetch(index) {|index| block }   -> obj
   :comment: |-
-    Tries to return the element at position <i>index</i>. If the index
-    lies outside the array, the first form throws an
-    <code>IndexError</code> exception, the second form returns
-    <i>default</i>, and the third form returns the value of invoking
-    the block, passing in the index. Negative values of <i>index</i>
-    count from the end of the array.
+    Intenta retornar el elemento en la posición <i>index</i>. Si el índice
+    permanece fuera del arreglo, el primer formulario arroja una
+    excepción de tipo <code>IndexError</code>, el segundo formulario retorna
+    <i>default</i>, y el tercer formulario retorna el valor de invocar 
+    el bloque, pasando en el índice. Valores negativos de <i>index</i>
+    cuentan desde el final del arreglo.
     
        a = [ 11, 22, 33, 44 ]
        a.fetch(1)               #=> 22
