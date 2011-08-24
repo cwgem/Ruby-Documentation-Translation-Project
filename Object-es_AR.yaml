@@ -20,14 +20,14 @@
     obj.to_enum(method = :each, *args)
     obj.enum_for(method = :each, *args)
   :comment: |-
-    Creates a new Enumerator which will enumerate by on calling +method+ on
+    Crea un nuevo Enumerator el cual enumera llamando +method+ sobre
     +obj+.
-    
-    +method+:: the method to call on +obj+ to generate the enumeration
-    +args+:: arguments that will be passed in +method+ <i>in addition</i>
-             to the item itself.  Note that the number of args
-             must not exceed the number expected by +method+
-    
+
+    +method+:: el método a llamar sobre el +obj+ para generar la enumeración
+    +args+:: argumentos que serán pasados en +method+ <i>en adicción</i> al 
+             item en si mismo. Observar que el número de argumentos no debe
+             exceder de el número esperado por +method+
+
     === Example
     
       str = "xyz"
@@ -38,7 +38,7 @@
       # => 121
       # => 122
     
-      # protect an array from being modified by some_method
+      # proteje un arreglo de ser modificado por some_method
       a = [1, 2, 3]
       some_method(a.to_enum)
 - :name: enum_for
