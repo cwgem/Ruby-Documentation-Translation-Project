@@ -54,7 +54,7 @@
              to the item itself.  Note that the number of args
              must not exceed the number expected by +method+
     
-    === Example
+    === Ejemplo
     
       str = "xyz"
     
@@ -70,36 +70,37 @@
 - :name: extend
   :arglist: obj.extend(module, ...)    -> obj
   :comment: |-
-    Adds to _obj_ the instance methods from each module given as a
-    parameter.
+    Agrega a _obj_ los métodos de instancia para cada modulo dado
+    como un parametro
     
        module Mod
          def hello
-           "Hello from Mod.\n"
+           "Hola desde Mod.\n"
          end
        end
     
        class Klass
          def hello
-           "Hello from Klass.\n"
+           "Hola desde Klass.\n"
          end
        end
     
        k = Klass.new
-       k.hello         #=> "Hello from Klass.\n"
+       k.hello         #=> "Hola desde Klass.\n"
        k.extend(Mod)   #=> #<Klass:0x401b3bc8>
-       k.hello         #=> "Hello from Mod.\n"
+       k.hello         #=> "Hola desde Mod.\n"
 - :name: object_id
   :arglist: |-
     obj.__id__       -> fixnum
     obj.object_id    -> fixnum
   :comment: |-
-    Returns an integer identifier for <i>obj</i>. The same number will
-    be returned on all calls to <code>id</code> for a given object, and
-    no two active objects will share an id.
-    <code>Object#object_id</code> is a different concept from the
-    <code>:name</code> notation, which returns the symbol id of
-    <code>name</code>. Replaces the deprecated <code>Object#id</code>.
+    Retorna un valor entero identificador para <i>obj</i>. El mismo número
+    se retorna en la llamadas a <code>id</code> para un objeto dado, y dos
+    objetods activos no compartiran un id.
+    <code>Object#object_id</code> es un concepoto diferente de la notación
+    <code>:name</code> la cual retorna el símbolo id de <code>name</code>.
+    Reemplaza el deprecado <code>Object#id</code>.
+
 - :name: display
   :arglist: obj.display(port=$>)    -> nil
   :comment: |-
