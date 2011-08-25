@@ -205,12 +205,12 @@
     ary.shift    -> obj or nil
     ary.shift(n) -> new_ary
   :comment: |-
-    Returns the first element of +self+ and removes it (shifting all
-    other elements down by one). Returns <code>nil</code> if the array
-    is empty.
+    Devuelve el primer elemento de +self+ y lo elimina (cambia todos
+    los otros elementos por uno). Retorna <code>nil</code> si el arreglo
+    está vacío.
     
-    If a number _n_ is given, returns an array of the first n elements
-    (or less) just like <code>array.slice!(0, n)</code> does.
+    Si un número _n_ es dado, retorna un arreglo de los primeros n elementos
+    (o menos) así como lo hace <code>array.slice!(0, n)</code>.
     
        args = [ "-m", "-q", "filename" ]
        args.shift     #=> "-m"
