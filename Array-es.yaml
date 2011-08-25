@@ -286,13 +286,13 @@
 - :name: length
   :arglist: ary.length -> int
   :comment: |-
-    Returns the number of elements in +self+. May be zero.
+    Retorna el número de elementos en +self+. Podría ser cero.
     
        [ 1, 2, 3, 4, 5 ].length   #=> 5
 - :name: empty?
   :arglist: ary.empty?   -> true or false
   :comment: |-
-    Returns <code>true</code> if +self+ contains no elements.
+    Retorna <code>true</code> si +self+ no contiene elementos.
     
        [].empty?   #=> true
 - :name: find_index
