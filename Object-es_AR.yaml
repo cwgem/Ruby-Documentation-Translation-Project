@@ -139,14 +139,14 @@
 - :name: =~
   :arglist: obj =~ other  -> nil
   :comment: |-
-    Pattern Match---Sobreescrito por clases descendientes (notably
-    <code>Regexp</code> and <code>String</code>) to provide meaningful
-    pattern-match semantics.
+    Pattern Match---Sobreescrito por clases descendientes (notoriamente
+    <code>Regexp</code> y <code>String</code>) para proveer significado a la
+    semántica de pattern-match.
 - :name: "!~"
   :arglist: obj !~ other  -> true or false
   :comment: |-
-    Returns true if two objects do not match (using the <i>=~</i>
-    method), otherwise false.
+    Retorna true si dos objetos no coinciden( usando el método <i>=~</i>), en 
+    caso contrario devolverá false
 - :name: eql?
   :arglist: |-
     obj == other        -> true or false
