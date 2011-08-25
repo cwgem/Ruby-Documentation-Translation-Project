@@ -222,8 +222,8 @@
 - :name: unshift
   :arglist: ary.unshift(obj, ...)  -> ary
   :comment: |-
-    Prepends objects to the front of +self+,
-    moving other elements upwards.
+    Antepone objetos al frente de +self+,
+    moviendo otros elementos hacia adelante.
     
        a = [ "b", "c", "d" ]
        a.unshift("a")   #=> ["a", "b", "c", "d"]
@@ -231,8 +231,8 @@
 - :name: insert
   :arglist: ary.insert(index, obj...)  -> ary
   :comment: |-
-    Inserts the given values before the element with the given index
-    (which may be negative).
+    Inserta los valores dados antes del elemento con el índice dado
+    (el cual podría ser negativo).
     
        a = %w{ a b c d }
        a.insert(2, 99)         #=> ["a", "b", 99, "c", "d"]
@@ -242,10 +242,10 @@
     ary.each {|item| block }   -> ary
     ary.each                   -> an_enumerator
   :comment: |-
-    Calls <i>block</i> once for each element in +self+, passing that
-    element as a parameter.
+    Llama <i>block</i> una vez por cada elemento en +self+, pasando ese
+    elemento como un parámetro.
     
-    If no block is given, an enumerator is returned instead.
+    Si el bloque no es dado, un enumerador se devuelve en su lugar.
     
        a = [ "a", "b", "c" ]
        a.each {|x| print x, " -- " }
