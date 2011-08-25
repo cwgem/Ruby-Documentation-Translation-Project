@@ -28,7 +28,7 @@
              item en si mismo. Observar que el número de argumentos no debe
              exceder de el número esperado por +method+
 
-    === Example
+    === Ejemplo
     
       str = "xyz"
     
@@ -46,13 +46,12 @@
     obj.to_enum(method = :each, *args)
     obj.enum_for(method = :each, *args)
   :comment: |-
-    Creates a new Enumerator which will enumerate by on calling +method+ on
-    +obj+.
+    Crea un nuevo Enumerator el cuál enumerará llamando +method+ desde +obj+.
     
-    +method+:: the method to call on +obj+ to generate the enumeration
-    +args+:: arguments that will be passed in +method+ <i>in addition</i>
-             to the item itself.  Note that the number of args
-             must not exceed the number expected by +method+
+    +method+:: el método a llamar sobre +obj+ para generar la enumeración
+    +args+:: argumentos que serán pasados en +method+ <i>en suma</i>
+             al item en si mismo.  Notar que el número de argumentos no debe
+             exceder el número esperado por +method+
     
     === Ejemplo
     
@@ -64,7 +63,7 @@
       # => 121
       # => 122
     
-      # protect an array from being modified by some_method
+      # proteje un array de ser modificado por some_method
       a = [1, 2, 3]
       some_method(a.to_enum)
 - :name: extend
@@ -104,21 +103,21 @@
 - :name: display
   :arglist: obj.display(port=$>)    -> nil
   :comment: |-
-    Prints <i>obj</i> on the given port (default <code>$></code>).
-    Equivalent to:
-    
+    Imprime <i>obj</i> en el puerto dado (default <code>$></code>).
+    Equivalente a:
+
        def display(port=$>)
          port.write self
        end
-    
-    For example:
+
+    Por ejemplo:
     
        1.display
        "cat".display
        [ 4, 5, 6 ].display
        puts
     
-    <em>produces:</em>
+    <em>produce:</em>
     
        1cat456
 - :name: nil?
@@ -128,17 +127,19 @@
       nil.nil?               -> true
       <anything_else>.nil?   -> false
     
-    Only the object <i>nil</i> responds <code>true</code> to <code>nil?</code>.
+    Unicamente el objeto <i>nil</i> responde con <code>true</code> a 
+    <code>nil?</code>.
 - :name: ===
   :arglist: obj === other   -> true or false
   :comment: |-
-    Case Equality---For class <code>Object</code>, effectively the same
-    as calling  <code>#==</code>, but typically overridden by descendants
-    to provide meaningful semantics in <code>case</code> statements.
+    Case Equality---Para clase <code>Object</code>, efectivamente lo mismo
+    que llamar <code>#==</code>, pero típicamente sobrescrito por otras 
+    clases descendientes para proveer semántica útil en sentencias 
+    <code>case</code>.
 - :name: =~
   :arglist: obj =~ other  -> nil
   :comment: |-
-    Pattern Match---Overridden by descendants (notably
+    Pattern Match---Sobreescrito por clases descendientes (notably
     <code>Regexp</code> and <code>String</code>) to provide meaningful
     pattern-match semantics.
 - :name: "!~"
