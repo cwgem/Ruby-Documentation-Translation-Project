@@ -274,8 +274,8 @@
     ary.reverse_each {|item| block }   -> ary
     ary.reverse_each                   -> an_enumerator
   :comment: |-
-    Same as <code>Array#each</code>, but traverses +self+ in reverse
-    order.
+    Igual que <code>Array#each</code>, pero atraviesa +self+ en orden
+    inverso.
     
        a = [ "a", "b", "c" ]
        a.reverse_each {|x| print x, " " }
