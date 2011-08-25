@@ -245,7 +245,7 @@
     Llama <i>block</i> una vez por cada elemento en +self+, pasando ese
     elemento como un parámetro.
     
-    Si el bloque no es dado, un enumerador se devuelve en su lugar.
+    Si el bloque no es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c" ]
        a.each {|x| print x, " -- " }
@@ -258,10 +258,10 @@
     ary.each_index {|index| block }  -> ary
     ary.each_index                   -> an_enumerator
   :comment: |-
-    Same as <code>Array#each</code>, but passes the index of the element
-    instead of the element itself.
+    Igual que <code>Array#each</code>, pero pasa el índice de el elemento 
+    en lugar del elemento mismo.
     
-    If no block is given, an enumerator is returned instead.
+    Si el bloque no es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c" ]
        a.each_index {|x| print x, " -- " }
