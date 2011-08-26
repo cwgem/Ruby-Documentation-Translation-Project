@@ -321,34 +321,34 @@
     ary.index {|item| block} ->  int or nil
     ary.index                ->  an_enumerator
   :comment: |-
-    Returns the index of the first object in +self+ such that the object is
-    <code>==</code> to <i>obj</i>. If a block is given instead of an
-    argument, returns index of first object for which <em>block</em> is true.
-    Returns <code>nil</code> if no match is found.
-    See also <code>Array#rindex</code>.
+    Devuelve el índice el primer objeto en +self+ de tal manera que el objeto es
+    <code>==</code> a <i>obj</i>. Si un bloque es dado en lugar de un
+    argumento, devuelve el índice del primer objeto para el cual <em>block</em> es verdadero.
+    Retorna <code>nil</code> si no se encuentran coincidencias.
+    Vea también <code>Array#rindex</code>.
     
-    If neither block nor argument is given, an enumerator is returned instead.
+    Si ningún bloque ni argumento es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c" ]
        a.index("b")        #=> 1
        a.index("z")        #=> nil
        a.index{|x|x=="b"}  #=> 1
     
-    This is an alias of <code>#find_index</code>.
+    Este es un alias de <code>#find_index</code>.
 - :name: rindex
   :arglist: |-
     ary.rindex(obj)           ->  int or nil
     ary.rindex {|item| block} ->  int or nil
     ary.rindex                ->  an_enumerator
   :comment: |-
-    Returns the index of the last object in +self+
-    <code>==</code> to <i>obj</i>. If a block is given instead of an
-    argument, returns index of first object for which <em>block</em> is
-    true, starting from the last object.
-    Returns <code>nil</code> if no match is found.
-    See also <code>Array#index</code>.
+    Retorna el índice del último objeto en +self+
+    <code>==</code> a <i>obj</i>. Si un bloque es dado en lugar de un 
+    argumento, devuelve el índice del primer objeto cuyo <em>block</em> es
+    verdadero, comenzando desde el último objeto.
+    Retorna <code>nil</code> si no se encuentran coincidencias.
+    Vea también <code>Array#index</code>.
     
-    If neither block nor argument is given, an enumerator is returned instead.
+    Si ningún bloque ni argumento es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "b", "b", "c" ]
        a.rindex("b")        #=> 3
