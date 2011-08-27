@@ -251,7 +251,7 @@
     Marca <i>obj</i> como marcado---si el nivel <code>$SAFE</code> 
     seteado correctamente,muchas llamadas al método que podría alterar el 
     funcionamiento entorno de los programas se negarán a aceptar cadenas 
-    contaminada.
+    marcadas.
 - :name: tainted?
   :arglist: obj.tainted?    -> true or false
   :comment: Retorna <code>true</code> si el objeto es marcado.
@@ -296,28 +296,28 @@
 - :name: to_s
   :arglist: obj.to_s    -> string
   :comment: |-
-    Returns a string representing <i>obj</i>. The default
-    <code>to_s</code> prints the object's class and an encoding of the
-    object id. As a special case, the top-level object that is the
-    initial execution context of Ruby programs returns ``main.''
+    Retorna un string representando <i>obj</i>. Por defecto
+    <code>to_s</code> imprime la clase del objeto y un encoding de
+    object id. Un caso especial, el valor del top-level object que es la
+    el contexto de ejecución inicial de programas Ruby retorna ``main.''
 - :name: inspect
   :arglist: obj.inspect   -> string
   :comment: |-
-    Returns a string containing a human-readable representation of
-    <i>obj</i>. If not overridden and no instance variables, uses the
-    <code>to_s</code> method to generate the string.
-    <i>obj</i>.  If not overridden, uses the <code>to_s</code> method to
-    generate the string.
+    Retorna un string contentiendo una representación humanamente legible de 
+    <i>obj</i>. Si no es sobreescrito y no tiene variables de instancia, utiliza el
+    método <code>to_s</code> para generar un string.
+    <i>obj</i>.  Si no es sobreescrito , utiliza el método <code>to_s</code> para
+    generar el string.
     
        [ 1, 2, 3..4, 'five' ].inspect   #=> "[1, 2, 3..4, \"five\"]"
        Time.new.inspect                 #=> "2008-03-08 19:43:39 +0900"
 - :name: singleton_methods
   :arglist: obj.singleton_methods(all=true)    -> array
   :comment: |-
-    Returns an array of the names of singleton methods for <i>obj</i>.
-    If the optional <i>all</i> parameter is true, the list will include
-    methods in modules included in <i>obj</i>.
-    Only public and protected singleton methods are returned.
+    Retorna un arreglo de los nombres de métodos singleton para <i>obj</i>.
+    Si el parámetro opcional <i>all</i> es verdadero, la lista incluira
+    métodos incluidos en módulos en <i>obj</i>.
+    Solo métodos públicos y protegidos singleton son retornados.
     
        module Other
          def three() end
