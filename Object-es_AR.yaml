@@ -143,34 +143,33 @@
     <code>Regexp</code> y <code>String</code>) para proveer significado a la
     semántica de pattern-match.
 - :name: "!~"
-  :arglist: obj !~ other  -> true or false
+  :arglist: obj !~ other  -> true o false
   :comment: |-
     Retorna true si dos objetos no coinciden( usando el método <i>=~</i>), en 
     caso contrario devolverá false
 - :name: eql?
   :arglist: |-
-    obj == other        -> true or false
-    obj.equal?(other)   -> true or false
-    obj.eql?(other)     -> true or false
+    obj == other        -> true o false
+    obj.equal?(other)   -> true o false
+    obj.eql?(other)     -> true o false
   :comment: |-
-    Equality---At the <code>Object</code> level, <code>==</code> returns
-    <code>true</code> only if <i>obj</i> and <i>other</i> are the
-    same object. Typically, this method is overridden in descendant
-    classes to provide class-specific meaning.
+    Equality---A nivel de <code>Object</code>, <code>==</code> retorna
+    <code>true</code> solamente si <i>obj</i> y <i>other</i> son el
+    mismo objeto. Tipicamente, éste objeto sobreescrito por una clase 
+    descendiente para proveer significado más especifico dentro de la clase.
     
-    Unlike <code>==</code>, the <code>equal?</code> method should never be
-    overridden by subclasses: it is used to determine object identity
-    (that is, <code>a.equal?(b)</code> iff <code>a</code> is the same
-    object as <code>b</code>).
+    Al contrario de <code>==</code>, el método <code>equal?</code> núnca
+    deberá ser sobreescrito por una subclase: éste es usado para determinar 
+    la identidad del objeto (esto es, <code>a.equal?(b)</code> si <code>a</code> 
+    es el mismo objeto como <code>b</code>).
     
-    The <code>eql?</code> method returns <code>true</code> if
-    <i>obj</i> and <i>anObject</i> have the same value. Used by
-    <code>Hash</code> to test members for equality.  For objects of
-    class <code>Object</code>, <code>eql?</code> is synonymous with
-    <code>==</code>. Subclasses normally continue this tradition, but
-    there are exceptions. <code>Numeric</code> types, for example,
-    perform type conversion across <code>==</code>, but not across
-    <code>eql?</code>, so:
+    El método <code>eql?</code> retorna <code>true</code> si
+    <i>obj</i> y <i>anObject</i> tienen el mismo valor. Es utilizado por
+    <code>Hash</code> para testear igualdad.  Para objetos de clase
+    <code>Object</code>, <code>eql?</code> es sinónimo con <code>==</code>. 
+    Subclases normalmente continunan esta tradición, pero hay excepciónes. 
+    Tipos <code>Numeric</code>, por ejemplo, realizan la conversión a travez 
+    de <code>==</code>, pero no con <code>eql?</code>, entonces:
     
        1 == 1.0     #=> true
        1.eql? 1.0   #=> false
