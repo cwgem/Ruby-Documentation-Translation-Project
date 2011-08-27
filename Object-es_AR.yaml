@@ -176,36 +176,36 @@
 - :name: hash
   :arglist: hash()
   :comment: |-
-    Generates a <code>Fixnum</code> hash value for this object.
-    This function must have the property that a.eql?(b) implies
+    Genera un valor hash <code>Fixnum</code> para el objeto.
+    Esta funcion debe tener la propiedad que a.eql?(b) implica
     a.hash <code>==</code> b.hash.
-    The hash value is used by class <code>Hash</code>.
-    Any hash value that exceeds the capacity of a <code>Fixnum</code> will be
-    truncated before being used.
+    El valor hash es usado por la clase <code>Hash</code>.
+    Cualquier valor hash que excede la capacidad de un <code>Fixnum</code> será
+    truncado antes de ser utilizado.
     
          "waffle".hash #=> -910576647
 - :name: <=>
   :arglist: obj <=> other -> 0 or nil
-  :comment: Returns 0 if obj === other, otherwise nil.
+  :comment: Retorna 0 si obj === other, en otro caso nil.
 - :name: class
   :arglist: obj.class    -> class
   :comment: |-
-    Returns the class of <i>obj</i>. This method must always be
-    called with an explicit receiver, as <code>class</code> is also a
-    reserved word in Ruby.
+    Retorna la clase de <i>obj</i>. Éste método deberá ser llamado siempre con
+    con un recibidor explicito, como <code>class</code> es también una palabra 
+    reservada en Ruby.
     
        1.class      #=> Fixnum
        self.class   #=> Object
 - :name: singleton_class
   :arglist: obj.singleton_class    -> class
   :comment: |-
-    Returns the singleton class of <i>obj</i>.  This method creates
-    a new singleton class if <i>obj</i> does not have it.
+    Retorna la clase singleton de <i>obj</i>.  Éste método crea una nueva clase
+    singleton si <i>obj</i> no lo tiene.
     
-    If <i>obj</i> is <code>nil</code>, <code>true</code>, or
-    <code>false</code>, it returns NilClass, TrueClass, or FalseClass,
-    respectively.
-    If <i>obj</i> is a Fixnum or a Symbol, it raises a TypeError.
+    Si <i>obj</i> es <code>nil</code>, <code>true</code>, o
+    <code>false</code>, este retorna NilClass, TrueClass, or FalseClass,
+    respectivamente.
+    Si <i>obj</i> es un Fixnum o un Symbol, este muestra un TypeError.
     
        Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
        String.singleton_class      #=> #<Class:String>
@@ -213,82 +213,82 @@
 - :name: clone
   :arglist: obj.clone -> an_object
   :comment: |-
-    Produces a shallow copy of <i>obj</i>---the instance variables of
-    <i>obj</i> are copied, but not the objects they reference. Copies
-    the frozen and tainted state of <i>obj</i>. See also the discussion
-    under <code>Object#dup</code>.
+    Produce un copia superficial de <i>obj</i>---las variables de instancia de
+    <i>obj</i> son copiadas, pero no los objetos a los que hace referencia. Copia
+    el estado actual de <i>obj</i>. Vea la referencia relacionada en 
+    <code>Object#dup</code>.
     
        class Klass
           attr_accessor :str
        end
        s1 = Klass.new      #=> #<Klass:0x401b3a38>
-       s1.str = "Hello"    #=> "Hello"
-       s2 = s1.clone       #=> #<Klass:0x401b3998 @str="Hello">
+       s1.str = "Hola"    #=> "Hola"
+       s2 = s1.clone       #=> #<Klass:0x401b3998 @str="Hola">
        s2.str[1,4] = "i"   #=> "i"
        s1.inspect          #=> "#<Klass:0x401b3a38 @str=\"Hi\">"
        s2.inspect          #=> "#<Klass:0x401b3998 @str=\"Hi\">"
     
-    This method may have class-specific behavior.  If so, that
-    behavior will be documented under the #+initialize_copy+ method of
-    the class.
+    Éste método puede tener un un comportamiento especifico de la clase.  Si lo tiene, este
+    estará documentado debajo del #+initialize_copy+ de la clase.
 - :name: dup
   :arglist: obj.dup -> an_object
   :comment: |-
-    Produces a shallow copy of <i>obj</i>---the instance variables of
-    <i>obj</i> are copied, but not the objects they reference.
-    <code>dup</code> copies the tainted state of <i>obj</i>. See also
-    the discussion under <code>Object#clone</code>. In general,
-    <code>clone</code> and <code>dup</code> may have different semantics
-    in descendant classes. While <code>clone</code> is used to duplicate
-    an object, including its internal state, <code>dup</code> typically
-    uses the class of the descendant object to create the new instance.
+    Produce uan copia superficial de <i>obj</i>---las variables de instancia de
+    <i>obj</i> son copiadas, pero no los objetos de referencia.
+    <code>dup</code> copia el estado actual de <i>obj</i>. Vea además
+    en <code>Object#clone</code>. En general, <code>clone</code> y 
+    <code>dup</code> pueden tener diferentes semánticas en clases descendientes.
+    Mientras <code>clone</code> es usado para duplicar un objeto, incluyendo su
+    estado interno, <code>dup</code> comunmente utiliza la clase del objeto 
+    descendiente para crear una nueva instancia.
     
-    This method may have class-specific behavior.  If so, that
-    behavior will be documented under the #+initialize_copy+ method of
-    the class.
+    Éste método puede tener un comportamiento expecifico de la clase.
+    Si lo tiene, ese comportamiento estará documentando bano el método
+    #+initialize_copy+ de clase.
 - :name: taint
   :arglist: obj.taint -> obj
   :comment: |-
-    Marks <i>obj</i> as tainted---if the <code>$SAFE</code> level is
-    set appropriately, many method calls which might alter the running
-    programs environment will refuse to accept tainted strings.
+    Marca <i>obj</i> como marcado---si el nivel <code>$SAFE</code> 
+    seteado correctamente,muchas llamadas al método que podría alterar el 
+    funcionamiento entorno de los programas se negarán a aceptar cadenas 
+    contaminada.
 - :name: tainted?
   :arglist: obj.tainted?    -> true or false
-  :comment: Returns <code>true</code> if the object is tainted.
+  :comment: Retorna <code>true</code> si el objeto es marcado.
 - :name: untaint
   :arglist: obj.untaint    -> obj
-  :comment: Removes the taint from <i>obj</i>.
+  :comment: Quita la marca de <i>obj</i>.
 - :name: untrust
   :arglist: obj.untrust -> obj
-  :comment: Marks <i>obj</i> as untrusted.
+  :comment: Marca <i>obj</i> como no confiable.
 - :name: untrusted?
-  :arglist: obj.untrusted?    -> true or false
-  :comment: Returns <code>true</code> if the object is untrusted.
+  :arglist: obj.untrusted?    -> true o false
+  :comment: Retorna <code>true</code> si el objeto no es confiable.
 - :name: trust
   :arglist: obj.trust    -> obj
-  :comment: Removes the untrusted mark from <i>obj</i>.
+  :comment: Quita la marca de no confiable de <i>obj</i>.
 - :name: freeze
   :arglist: obj.freeze    -> obj
   :comment: |-
-    Prevents further modifications to <i>obj</i>. A
-    <code>RuntimeError</code> will be raised if modification is attempted.
-    There is no way to unfreeze a frozen object. See also
+    Impide nuevas modificaiones a <i>obj</i>. Un
+    <code>RuntimeError</code> será mostrado si se intenta una modificación.
+    No hay forma de volver atras un objeto congelado. Vea también 
     <code>Object#frozen?</code>.
     
-    This method returns self.
+    Éste método retorna self.
     
        a = [ "a", "b", "c" ]
        a.freeze
        a << "z"
     
-    <em>produces:</em>
+    <em>produce:</em>
     
-       prog.rb:3:in `<<': can't modify frozen array (RuntimeError)
+       prog.rb:3:in `<<': cann't modify frozen array (RuntimeError)
         from prog.rb:3
 - :name: frozen?
-  :arglist: obj.frozen?    -> true or false
+  :arglist: obj.frozen?    -> true o false
   :comment: |-
-    Returns the freeze status of <i>obj</i>.
+    Retorna el estado de si <i>obj</i> esta o no congelado.
     
        a = [ "a", "b", "c" ]
        a.freeze    #=> ["a", "b", "c"]
