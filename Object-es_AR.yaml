@@ -130,7 +130,7 @@
     Unicamente el objeto <i>nil</i> responde con <code>true</code> a 
     <code>nil?</code>.
 - :name: ===
-  :arglist: obj === other   -> true or false
+  :arglist: obj === other   -> true o false
   :comment: |-
     Case Equality---Para clase <code>Object</code>, efectivamente lo mismo
     que llamar <code>#==</code>, pero típicamente sobrescrito por otras 
@@ -185,7 +185,7 @@
     
          "waffle".hash #=> -910576647
 - :name: <=>
-  :arglist: obj <=> other -> 0 or nil
+  :arglist: obj <=> other -> 0 o nil
   :comment: Retorna 0 si obj === other, en otro caso nil.
 - :name: class
   :arglist: obj.class    -> class
@@ -203,7 +203,7 @@
     singleton si <i>obj</i> no lo tiene.
     
     Si <i>obj</i> es <code>nil</code>, <code>true</code>, o
-    <code>false</code>, este retorna NilClass, TrueClass, or FalseClass,
+    <code>false</code>, este retorna NilClass, TrueClass, o FalseClass,
     respectivamente.
     Si <i>obj</i> es un Fixnum o un Symbol, este muestra un TypeError.
     
@@ -233,7 +233,7 @@
 - :name: dup
   :arglist: obj.dup -> an_object
   :comment: |-
-    Produce uan copia superficial de <i>obj</i>---las variables de instancia de
+    Produce una copia superficial de <i>obj</i>---las variables de instancia de
     <i>obj</i> son copiadas, pero no los objetos de referencia.
     <code>dup</code> copia el estado actual de <i>obj</i>. Vea además
     en <code>Object#clone</code>. En general, <code>clone</code> y 
@@ -253,7 +253,7 @@
     funcionamiento entorno de los programas se negarán a aceptar cadenas 
     marcadas.
 - :name: tainted?
-  :arglist: obj.tainted?    -> true or false
+  :arglist: obj.tainted?    -> true o false
   :comment: Retorna <code>true</code> si el objeto es marcado.
 - :name: untaint
   :arglist: obj.untaint    -> obj
@@ -344,9 +344,9 @@
 - :name: instance_variables
   :arglist: obj.instance_variables    -> array
   :comment: |-
-    Returns an array of instance variable names for the receiver. Note
-    that simply defining an accessor does not create the corresponding
-    instance variable.
+    Retorna un array de nombres de variables de instancia del receptor.
+    Vea que simplemente definiendo un acceso no crea la correspondiente
+    variable de instancia.
     
        class Fred
          attr_accessor :a1
@@ -358,11 +358,10 @@
 - :name: instance_variable_get
   :arglist: obj.instance_variable_get(symbol)    -> obj
   :comment: |-
-    Returns the value of the given instance variable, or nil if the
-    instance variable is not set. The <code>@</code> part of the
-    variable name should be included for regular instance
-    variables. Throws a <code>NameError</code> exception if the
-    supplied symbol is not valid as an instance variable name.
+    Regresa el valor de una variable dada, o nil si la instancia de
+    la variable no fue establecida. La <code>@</code> debe ser incluida
+    para variables de instancia. Lanza una <code>NameError</code> excepcion si
+    el símbolo provisto no es valido como una instancia de variable.
     
        class Fred
          def initialize(p1, p2)
@@ -375,10 +374,9 @@
 - :name: instance_variable_set
   :arglist: obj.instance_variable_set(symbol, obj)    -> obj
   :comment: |-
-    Sets the instance variable names by <i>symbol</i> to
-    <i>object</i>, thereby frustrating the efforts of the class's
-    author to attempt to provide proper encapsulation. The variable
-    did not have to exist prior to this call.
+    Establece los nombres de variables de instancia de <i>symbol</i> a
+    <i>object</i>, ante la negativa a esfuerzo de la clase autor para proveer
+    una encapsulación valida. La variable no tiene que existir previo a esta llamada.
     
        class Fred
          def initialize(p1, p2)
@@ -390,10 +388,10 @@
        fred.instance_variable_set(:@c, 'cat')   #=> "cat"
        fred.inspect                             #=> "#<Fred:0x401b3da8 @a=\"dog\", @b=99, @c=\"cat\">"
 - :name: instance_variable_defined?
-  :arglist: obj.instance_variable_defined?(symbol)    -> true or false
+  :arglist: obj.instance_variable_defined?(symbol)    -> true o false
   :comment: |-
-    Returns <code>true</code> if the given instance variable is
-    defined in <i>obj</i>.
+    Retorna <code>true</code> si la variable de instancia dada es definida en 
+    <i>obj</i>.
     
        class Fred
          def initialize(p1, p2)
@@ -407,8 +405,8 @@
 - :name: remove_instance_variable
   :arglist: obj.remove_instance_variable(symbol)    -> obj
   :comment: |-
-    Removes the named instance variable from <i>obj</i>, returning that
-    variable's value.
+    Quita la variable de instancia nombrada desde <i>obj</i>, retorando
+    el valor que tiene la variable.
     
        class Dummy
          attr_reader :var
@@ -424,18 +422,18 @@
        d.remove   #=> 99
        d.var      #=> nil
 - :name: instance_of?
-  :arglist: obj.instance_of?(class)    -> true or false
+  :arglist: obj.instance_of?(class)    -> true o false
   :comment: |-
-    Returns <code>true</code> if <i>obj</i> is an instance of the given
-    class. See also <code>Object#kind_of?</code>.
+    Retorna <code>true</code> si <i>obj</i> es una instancia de la clase dada. 
+    Vea también <code>Object#kind_of?</code>.
 - :name: kind_of?
   :arglist: |-
-    obj.is_a?(class)       -> true or false
-    obj.kind_of?(class)    -> true or false
+    obj.is_a?(class)       -> true o false
+    obj.kind_of?(class)    -> true o false
   :comment: |-
-    Returns <code>true</code> if <i>class</i> is the class of
-    <i>obj</i>, or if <i>class</i> is one of the superclasses of
-    <i>obj</i> or modules included in <i>obj</i>.
+    Retorna <code>true</code> si <i>class</i> es la clase de
+    <i>obj</i>, o si <i>class</i> es una de las superclases de
+    <i>obj</i> o modulos incluidos en <i>obj</i>.
     
        module M;    end
        class A
@@ -454,12 +452,12 @@
        b.kind_of? M       #=> true
 - :name: is_a?
   :arglist: |-
-    obj.is_a?(class)       -> true or false
-    obj.kind_of?(class)    -> true or false
+    obj.is_a?(class)       -> true o false
+    obj.kind_of?(class)    -> true o false
   :comment: |-
-    Returns <code>true</code> if <i>class</i> is the class of
-    <i>obj</i>, or if <i>class</i> is one of the superclasses of
-    <i>obj</i> or modules included in <i>obj</i>.
+    Regresa <code>true</code> si <i>class</i> es la clase de
+    <i>obj</i>, o si <i>class</i> es una de las superclasses de
+    <i>obj</i> o modulos incluidos en <i>obj</i>.
     
        module M;    end
        class A
@@ -521,7 +519,7 @@
     define_singleton_method(symbol) { block } -> proc
   :comment: |-
     Defines a singleton method in the receiver. The _method_
-    parameter can be a +Proc+, a +Method+ or an +UnboundMethod+ object.
+    parameter can be a +Proc+, a +Method+ o an +UnboundMethod+ object.
     If a block is specified, it is used as the method body.
     
        class A
@@ -564,7 +562,7 @@
     
        1.public_send(:puts, "hello")  # causes NoMethodError
 - :name: respond_to?
-  :arglist: obj.respond_to?(symbol, include_private=false) -> true or false
+  :arglist: obj.respond_to?(symbol, include_private=false) -> true o false
   :comment: |-
     Returns +true+ if _obj_ responds to the given
     method. Private methods are included in the search only if the
@@ -577,10 +575,10 @@
     If the method is not defined, <code>respond_to_missing?</code>
     method is called and the result is returned.
 - :name: respond_to_missing?
-  :arglist: obj.respond_to_missing?(symbol, include_private) -> true or false
+  :arglist: obj.respond_to_missing?(symbol, include_private) -> true o false
   :comment: |-
     Hook method to return whether the _obj_ can respond to _id_ method
-    or not.
+    o not.
     
     See #respond_to?.
 :class_methods: []
