@@ -477,11 +477,11 @@
     ary.collect                  -> an_enumerator
     ary.map                      -> an_enumerator
   :comment: |-
-    Invokes <i>block</i> once for each element of +self+. Creates a
-    new array containing the values returned by the block.
-    See also <code>Enumerable#collect</code>.
+    Invoca <i>block</i> una vez por cada elemento de +self+. Crea un
+    nuevo arreglo conteniendo los valores retornados por el bloque.
+    Vea también <code>Enumerable#collect</code>.
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c", "d" ]
        a.collect {|x| x + "!" }   #=> ["a!", "b!", "c!", "d!"]
@@ -493,11 +493,11 @@
     ary.collect                    -> an_enumerator
     ary.map                        -> an_enumerator
   :comment: |-
-    Invokes the block once for each element of +self+, replacing the
-    element with the value returned by _block_.
-    See also <code>Enumerable#collect</code>.
+    Invoca el bloque una vez por cada elemento de +self+, reemplazando el
+    elemento con el valor retornado por _block_.
+    Vea también <code>Enumerable#collect</code>.
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c", "d" ]
        a.collect! {|x| x + "!" }
