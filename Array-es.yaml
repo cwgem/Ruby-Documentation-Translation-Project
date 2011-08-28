@@ -543,10 +543,10 @@
 - :name: values_at
   :arglist: ary.values_at(selector,... )  -> new_ary
   :comment: |-
-    Returns an array containing the elements in
-    +self+ corresponding to the given selector(s). The selectors
-    may be either integer indices or ranges.
-    See also <code>Array#select</code>.
+    Retorna un arreglo conteniendo los elementos en
+    +self+ correspondiente al selector(es) dados. Los selectores
+    podrían índices enteros o rangos.
+    Vea también <code>Array#select</code>.
     
        a = %w{ a b c d e f }
        a.values_at(1, 3, 5)
