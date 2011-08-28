@@ -1,0 +1,655 @@
+- :name: zip
+  :arglist: |-
+    ary.zip(arg, ...)                   -> new_ary
+    ary.zip(arg, ...) {| arr | block }  -> nil
+  :comment: |-
+    Converts any arguments to arrays, then merges elements of
+    +self+ with corresponding elements from each argument. This
+    generates a sequence of <code>self.size</code> <em>n</em>-element
+    arrays, where <em>n</em> is one more that the count of arguments. If
+    the size of any argument is less than <code>enumObj.size</code>,
+    <code>nil</code> values are supplied. If a block is given, it is
+    invoked for each output array, otherwise an array of arrays is
+    returned.
+    
+       a = [ 4, 5, 6 ]
+       b = [ 7, 8, 9 ]
+       [1,2,3].zip(a, b)      #=> [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+       [1,2].zip(a,b)         #=> [[1, 4, 7], [2, 5, 8]]
+       a.zip([1,2],[8])       #=> [[4,1,8], [5,2,nil], [6,nil,nil]]
+- :name: transpose
+  :arglist: ary.transpose -> new_ary
+  :comment: |-
+    Assumes that +self+ is an array of arrays and transposes the
+    rows and columns.
+    
+       a = [[1,2], [3,4], [5,6]]
+       a.transpose   #=> [[1, 3, 5], [2, 4, 6]]
+- :name: replace
+  :arglist: ary.replace(other_ary)  -> ary
+  :comment: |-
+    Replaces the contents of +self+ with the contents of
+    <i>other_ary</i>, truncating or expanding if necessary.
+    
+       a = [ "a", "b", "c", "d", "e" ]
+       a.replace([ "x", "y", "z" ])   #=> ["x", "y", "z"]
+       a                              #=> ["x", "y", "z"]
+- :name: clear
+  :arglist: ary.clear    -> ary
+  :comment: |-
+    Removes all elements from +self+.
+    
+       a = [ "a", "b", "c", "d", "e" ]
+       a.clear    #=> [ ]
+- :name: fill
+  :arglist: |-
+    ary.fill(obj)                                -> ary
+    ary.fill(obj, start [, length])              -> ary
+    ary.fill(obj, range )                        -> ary
+    ary.fill {|index| block }                    -> ary
+    ary.fill(start [, length] ) {|index| block } -> ary
+    ary.fill(range) {|index| block }             -> ary
+  :comment: |-
+    The first three forms set the selected elements of +self+ (which
+    may be the entire array) to <i>obj</i>. A <i>start</i> of
+    <code>nil</code> is equivalent to zero. A <i>length</i> of
+    <code>nil</code> is equivalent to <i>self.length</i>. The last three
+    forms fill the array with the value of the block. The block is
+    passed the absolute index of each element to be filled.
+    Negative values of <i>start</i> count from the end of the array.
+    
+       a = [ "a", "b", "c", "d" ]
+       a.fill("x")              #=> ["x", "x", "x", "x"]
+       a.fill("z", 2, 2)        #=> ["x", "x", "z", "z"]
+       a.fill("y", 0..1)        #=> ["y", "y", "z", "z"]
+       a.fill {|i| i*i}         #=> [0, 1, 4, 9]
+       a.fill(-2) {|i| i*i*i}   #=> [0, 1, 8, 27]
+- :name: include?
+  :arglist: ary.include?(obj)   -> true or false
+  :comment: |-
+    Returns <code>true</code> if the given object is present in
+    +self+ (that is, if any object <code>==</code> <i>anObject</i>),
+    <code>false</code> otherwise.
+    
+       a = [ "a", "b", "c" ]
+       a.include?("b")   #=> true
+       a.include?("z")   #=> false
+- :name: <=>
+  :arglist: ary <=> other_ary   ->  -1, 0, +1 or nil
+  :comment: |-
+    Comparison---Returns an integer (-1, 0,
+    or +1) if this array is less than, equal to, or greater than
+    <i>other_ary</i>.  Each object in each array is compared
+    (using <=>). If any value isn't
+    equal, then that inequality is the return value. If all the
+    values found are equal, then the return is based on a
+    comparison of the array lengths.  Thus, two arrays are
+    ``equal'' according to <code>Array#<=></code> if and only if they have
+    the same length and the value of each element is equal to the
+    value of the corresponding element in the other array.
+    
+       [ "a", "a", "c" ]    <=> [ "a", "b", "c" ]   #=> -1
+       [ 1, 2, 3, 4, 5, 6 ] <=> [ 1, 2 ]            #=> +1
+- :name: slice
+  :arglist: |-
+    ary[index]                -> obj     or nil
+    ary[start, length]        -> new_ary or nil
+    ary[range]                -> new_ary or nil
+    ary.slice(index)          -> obj     or nil
+    ary.slice(start, length)  -> new_ary or nil
+    ary.slice(range)          -> new_ary or nil
+  :comment: |-
+    Element Reference---Returns the element at _index_,
+    or returns a subarray starting at _start_ and
+    continuing for _length_ elements, or returns a subarray
+    specified by _range_.
+    Negative indices count backward from the end of the
+    array (-1 is the last element). Returns +nil+ if the index
+    (or starting index) are out of range.
+    
+       a = [ "a", "b", "c", "d", "e" ]
+       a[2] +  a[0] + a[1]    #=> "cab"
+       a[6]                   #=> nil
+       a[1, 2]                #=> [ "b", "c" ]
+       a[1..3]                #=> [ "b", "c", "d" ]
+       a[4..7]                #=> [ "e" ]
+       a[6..10]               #=> nil
+       a[-3, 3]               #=> [ "c", "d", "e" ]
+       # special cases
+       a[5]                   #=> nil
+       a[5, 1]                #=> []
+       a[5..10]               #=> []
+- :name: slice!
+  :arglist: |-
+    ary.slice!(index)         -> obj or nil
+    ary.slice!(start, length) -> new_ary or nil
+    ary.slice!(range)         -> new_ary or nil
+  :comment: |-
+    Deletes the element(s) given by an index (optionally with a length)
+    or by a range. Returns the deleted object (or objects), or
+    <code>nil</code> if the index is out of range.
+    
+       a = [ "a", "b", "c" ]
+       a.slice!(1)     #=> "b"
+       a               #=> ["a", "c"]
+       a.slice!(-1)    #=> "c"
+       a               #=> ["a"]
+       a.slice!(100)   #=> nil
+       a               #=> ["a"]
+- :name: assoc
+  :arglist: ary.assoc(obj)   -> new_ary  or  nil
+  :comment: |-
+    Searches through an array whose elements are also arrays
+    comparing _obj_ with the first element of each contained array
+    using obj.==.
+    Returns the first contained array that matches (that
+    is, the first associated array),
+    or +nil+ if no match is found.
+    See also <code>Array#rassoc</code>.
+    
+       s1 = [ "colors", "red", "blue", "green" ]
+       s2 = [ "letters", "a", "b", "c" ]
+       s3 = "foo"
+       a  = [ s1, s2, s3 ]
+       a.assoc("letters")  #=> [ "letters", "a", "b", "c" ]
+       a.assoc("foo")      #=> nil
+- :name: rassoc
+  :arglist: ary.rassoc(obj) -> new_ary or nil
+  :comment: |-
+    Searches through the array whose elements are also arrays. Compares
+    _obj_ with the second element of each contained array using
+    <code>==</code>. Returns the first contained array that matches. See
+    also <code>Array#assoc</code>.
+    
+       a = [ [ 1, "one"], [2, "two"], [3, "three"], ["ii", "two"] ]
+       a.rassoc("two")    #=> [2, "two"]
+       a.rassoc("four")   #=> nil
+- :name: +
+  :arglist: ary + other_ary   -> new_ary
+  :comment: |-
+    Concatenation---Returns a new array built by concatenating the
+    two arrays together to produce a third array.
+    
+       [ 1, 2, 3 ] + [ 4, 5 ]    #=> [ 1, 2, 3, 4, 5 ]
+- :name: "*"
+  :arglist: |-
+    ary * int     -> new_ary
+    ary * str     -> new_string
+  :comment: |-
+    Repetition---With a String argument, equivalent to
+    self.join(str). Otherwise, returns a new array
+    built by concatenating the _int_ copies of +self+.
+    
+       [ 1, 2, 3 ] * 3    #=> [ 1, 2, 3, 1, 2, 3, 1, 2, 3 ]
+       [ 1, 2, 3 ] * ","  #=> "1,2,3"
+- :name: "-"
+  :arglist: ary - other_ary    -> new_ary
+  :comment: |-
+    Array Difference---Returns a new array that is a copy of
+    the original array, removing any items that also appear in
+    <i>other_ary</i>. (If you need set-like behavior, see the
+    library class Set.)
+    
+       [ 1, 1, 2, 2, 3, 3, 4, 5 ] - [ 1, 2, 4 ]  #=>  [ 3, 3, 5 ]
+- :name: "&"
+  :arglist: ary & other_ary      -> new_ary
+  :comment: |-
+    Set Intersection---Returns a new array
+    containing elements common to the two arrays, with no duplicates.
+    
+       [ 1, 1, 3, 5 ] & [ 1, 2, 3 ]   #=> [ 1, 3 ]
+- :name: "|"
+  :arglist: ary | other_ary     -> new_ary
+  :comment: |-
+    Set Union---Returns a new array by joining this array with
+    <i>other_ary</i>, removing duplicates.
+    
+       [ "a", "b", "c" ] | [ "c", "d", "a" ]
+              #=> [ "a", "b", "c", "d" ]
+- :name: uniq
+  :arglist: ary.uniq   -> new_ary
+  :comment: |-
+    Returns a new array by removing duplicate values in +self+.
+    
+       a = [ "a", "a", "b", "b", "c" ]
+       a.uniq   #=> ["a", "b", "c"]
+       c = [ "a:def", "a:xyz", "b:abc", "b:xyz", "c:jkl" ]
+       c.uniq {|s| s[/^\w+/]}  #=> [ "a:def", "b:abc", "c:jkl" ]
+- :name: uniq!
+  :arglist: ary.uniq! -> ary or nil
+  :comment: |-
+    Removes duplicate elements from +self+.
+    Returns <code>nil</code> if no changes are made (that is, no
+    duplicates are found).
+    
+       a = [ "a", "a", "b", "b", "c" ]
+       a.uniq!   #=> ["a", "b", "c"]
+       b = [ "a", "b", "c" ]
+       b.uniq!   #=> nil
+       c = [ "a:def", "a:xyz", "b:abc", "b:xyz", "c:jkl" ]
+       c.uniq! {|s| s[/^\w+/]}  #=> [ "a:def", "b:abc", "c:jkl" ]
+- :name: compact
+  :arglist: ary.compact     -> new_ary
+  :comment: |-
+    Returns a copy of +self+ with all +nil+ elements removed.
+    
+       [ "a", nil, "b", nil, "c", nil ].compact
+                         #=> [ "a", "b", "c" ]
+- :name: compact!
+  :arglist: ary.compact!    -> ary  or  nil
+  :comment: |-
+    Removes +nil+ elements from the array.
+    Returns +nil+ if no changes were made, otherwise returns
+    <i>ary</i>.
+    
+       [ "a", nil, "b", nil, "c" ].compact! #=> [ "a", "b", "c" ]
+       [ "a", "b", "c" ].compact!           #=> nil
+- :name: flatten
+  :arglist: |-
+    ary.flatten -> new_ary
+    ary.flatten(level) -> new_ary
+  :comment: |-
+    Returns a new array that is a one-dimensional flattening of this
+    array (recursively). That is, for every element that is an array,
+    extract its elements into the new array.  If the optional
+    <i>level</i> argument determines the level of recursion to flatten.
+    
+       s = [ 1, 2, 3 ]           #=> [1, 2, 3]
+       t = [ 4, 5, 6, [7, 8] ]   #=> [4, 5, 6, [7, 8]]
+       a = [ s, t, 9, 10 ]       #=> [[1, 2, 3], [4, 5, 6, [7, 8]], 9, 10]
+       a.flatten                 #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+       a = [ 1, 2, [3, [4, 5] ] ]
+       a.flatten(1)              #=> [1, 2, 3, [4, 5]]
+- :name: flatten!
+  :arglist: |-
+    ary.flatten!        -> ary or nil
+    ary.flatten!(level) -> array or nil
+  :comment: |-
+    Flattens +self+ in place.
+    Returns <code>nil</code> if no modifications were made (i.e.,
+    <i>ary</i> contains no subarrays.)  If the optional <i>level</i>
+    argument determines the level of recursion to flatten.
+    
+       a = [ 1, 2, [3, [4, 5] ] ]
+       a.flatten!   #=> [1, 2, 3, 4, 5]
+       a.flatten!   #=> nil
+       a            #=> [1, 2, 3, 4, 5]
+       a = [ 1, 2, [3, [4, 5] ] ]
+       a.flatten!(1) #=> [1, 2, 3, [4, 5]]
+- :name: count
+  :arglist: |-
+    ary.count      -> int
+    ary.count(obj) -> int
+    ary.count { |item| block }  -> int
+  :comment: |-
+    Returns the number of elements.  If an argument is given, counts
+    the number of elements which equals to <i>obj</i>.  If a block is
+    given, counts the number of elements yielding a true value.
+    
+       ary = [1, 2, 4, 2]
+       ary.count             #=> 4
+       ary.count(2)          #=> 2
+       ary.count{|x|x%2==0}  #=> 3
+- :name: shuffle!
+  :arglist: |-
+    ary.shuffle!              -> ary
+    ary.shuffle!(random: rng) -> ary
+  :comment: |-
+    Shuffles elements in +self+ in place.
+    If +rng+ is given, it will be used as the random number generator.
+- :name: shuffle
+  :arglist: |-
+    ary.shuffle              -> new_ary
+    ary.shuffle(random: rng) -> new_ary
+  :comment: |-
+    Returns a new array with elements of this array shuffled.
+    
+       a = [ 1, 2, 3 ]           #=> [1, 2, 3]
+       a.shuffle                 #=> [2, 3, 1]
+    
+    If +rng+ is given, it will be used as the random number generator.
+    
+       a.shuffle(random: Random.new(1))  #=> [1, 3, 2]
+- :name: sample
+  :arglist: |-
+    ary.sample                  -> obj
+    ary.sample(random: rng)     -> obj
+    ary.sample(n)               -> new_ary
+    ary.sample(n, random: rng)  -> new_ary
+  :comment: |-
+    Choose a random element or +n+ random elements from the array. The elements
+    are chosen by using random and unique indices into the array in order to
+    ensure that an element doesn't repeat itself unless the array already
+    contained duplicate elements. If the array is empty the first form returns
+    <code>nil</code> and the second form returns an empty array.
+    
+    If +rng+ is given, it will be used as the random number generator.
+- :name: cycle
+  :arglist: |-
+    ary.cycle(n=nil) {|obj| block }  -> nil
+    ary.cycle(n=nil)                 -> an_enumerator
+  :comment: |-
+    Calls <i>block</i> for each element repeatedly _n_ times or
+    forever if none or +nil+ is given.  If a non-positive number is
+    given or the array is empty, does nothing.  Returns +nil+ if the
+    loop has finished without getting interrupted.
+    
+    If no block is given, an enumerator is returned instead.
+    
+       a = ["a", "b", "c"]
+       a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+       a.cycle(2) {|x| puts x }  # print, a, b, c, a, b, c.
+- :name: permutation
+  :arglist: |-
+    ary.permutation { |p| block }          -> ary
+    ary.permutation                        -> an_enumerator
+    ary.permutation(n) { |p| block }       -> ary
+    ary.permutation(n)                     -> an_enumerator
+  :comment: |-
+    When invoked with a block, yield all permutations of length <i>n</i>
+    of the elements of <i>ary</i>, then return the array itself.
+    If <i>n</i> is not specified, yield all permutations of all elements.
+    The implementation makes no guarantees about the order in which
+    the permutations are yielded.
+    
+    If no block is given, an enumerator is returned instead.
+    
+    Examples:
+    
+        a = [1, 2, 3]
+        a.permutation.to_a     #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+        a.permutation(1).to_a  #=> [[1],[2],[3]]
+        a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
+        a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+        a.permutation(0).to_a  #=> [[]] # one permutation of length 0
+        a.permutation(4).to_a  #=> []   # no permutations of length 4
+- :name: combination
+  :arglist: |-
+    ary.combination(n) { |c| block }    -> ary
+    ary.combination(n)                  -> an_enumerator
+  :comment: |-
+    When invoked with a block, yields all combinations of length <i>n</i>
+    of elements from <i>ary</i> and then returns <i>ary</i> itself.
+    The implementation makes no guarantees about the order in which
+    the combinations are yielded.
+    
+    If no block is given, an enumerator is returned instead.
+    
+    Examples:
+    
+        a = [1, 2, 3, 4]
+        a.combination(1).to_a  #=> [[1],[2],[3],[4]]
+        a.combination(2).to_a  #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+        a.combination(3).to_a  #=> [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
+        a.combination(4).to_a  #=> [[1,2,3,4]]
+        a.combination(0).to_a  #=> [[]] # one combination of length 0
+        a.combination(5).to_a  #=> []   # no combinations of length 5
+- :name: repeated_permutation
+  :arglist: |-
+    ary.repeated_permutation(n) { |p| block } -> ary
+    ary.repeated_permutation(n)               -> an_enumerator
+  :comment: |-
+    When invoked with a block, yield all repeated permutations of length
+    <i>n</i> of the elements of <i>ary</i>, then return the array itself.
+    The implementation makes no guarantees about the order in which
+    the repeated permutations are yielded.
+    
+    If no block is given, an enumerator is returned instead.
+    
+    Examples:
+    
+        a = [1, 2]
+        a.repeated_permutation(1).to_a  #=> [[1], [2]]
+        a.repeated_permutation(2).to_a  #=> [[1,1],[1,2],[2,1],[2,2]]
+        a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
+                                        #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
+        a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
+- :name: repeated_combination
+  :arglist: |-
+    ary.repeated_combination(n) { |c| block } -> ary
+    ary.repeated_combination(n)               -> an_enumerator
+  :comment: |-
+    When invoked with a block, yields all repeated combinations of
+    length <i>n</i> of elements from <i>ary</i> and then returns
+    <i>ary</i> itself.
+    The implementation makes no guarantees about the order in which
+    the repeated combinations are yielded.
+    
+    If no block is given, an enumerator is returned instead.
+    
+    Examples:
+    
+        a = [1, 2, 3]
+        a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
+        a.repeated_combination(2).to_a  #=> [[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]]
+        a.repeated_combination(3).to_a  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
+                                        #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
+        a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3],
+                                        #    [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3],
+                                        #    [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]]
+        a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
+- :name: product
+  :arglist: |-
+    ary.product(other_ary, ...)                -> new_ary
+    ary.product(other_ary, ...) { |p| block }  -> ary
+  :comment: |-
+    Returns an array of all combinations of elements from all arrays,
+    The length of the returned array is the product of the length
+    of +self+ and the argument arrays.
+    If given a block, <i>product</i> will yield all combinations
+    and return +self+ instead.
+    
+       [1,2,3].product([4,5])     #=> [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
+       [1,2].product([1,2])       #=> [[1,1],[1,2],[2,1],[2,2]]
+       [1,2].product([3,4],[5,6]) #=> [[1,3,5],[1,3,6],[1,4,5],[1,4,6],
+                                  #     [2,3,5],[2,3,6],[2,4,5],[2,4,6]]
+       [1,2].product()            #=> [[1],[2]]
+       [1,2].product([])          #=> []
+- :name: take
+  :arglist: ary.take(n)               -> new_ary
+  :comment: |-
+    Returns first n elements from <i>ary</i>.
+    
+       a = [1, 2, 3, 4, 5, 0]
+       a.take(3)             #=> [1, 2, 3]
+- :name: take_while
+  :arglist: |-
+    ary.take_while {|arr| block }   -> new_ary
+    ary.take_while                  -> an_enumerator
+  :comment: |-
+    Passes elements to the block until the block returns +nil+ or +false+,
+    then stops iterating and returns an array of all prior elements.
+    
+    If no block is given, an enumerator is returned instead.
+    
+       a = [1, 2, 3, 4, 5, 0]
+       a.take_while {|i| i < 3 }   #=> [1, 2]
+- :name: drop
+  :arglist: ary.drop(n)               -> new_ary
+  :comment: |-
+    Drops first n elements from +ary+ and returns the rest of
+    the elements in an array.
+    
+       a = [1, 2, 3, 4, 5, 0]
+       a.drop(3)             #=> [4, 5, 0]
+- :name: drop_while
+  :arglist: |-
+    ary.drop_while {|arr| block }   -> new_ary
+    ary.drop_while                  -> an_enumerator
+  :comment: |-
+    Drops elements up to, but not including, the first element for
+    which the block returns +nil+ or +false+ and returns an array
+    containing the remaining elements.
+    
+    If no block is given, an enumerator is returned instead.
+    
+       a = [1, 2, 3, 4, 5, 0]
+       a.drop_while {|i| i < 3 }   #=> [3, 4, 5, 0]
+- :name: to_s
+  :arglist: to_s()
+  :comment: ""
+- :name: size
+  :arglist: size()
+  :comment: ""
+- :name: pack
+  :arglist: arr.pack ( aTemplateString ) -> aBinaryString
+  :comment: |-
+    Packs the contents of <i>arr</i> into a binary sequence according to
+    the directives in <i>aTemplateString</i> (see the table below)
+    Directives ``A,'' ``a,'' and ``Z'' may be followed by a count,
+    which gives the width of the resulting field. The remaining
+    directives also may take a count, indicating the number of array
+    elements to convert. If the count is an asterisk
+    (``<code>*</code>''), all remaining array elements will be
+    converted. Any of the directives ``<code>sSiIlL</code>'' may be
+    followed by an underscore (``<code>_</code>'') or
+    exclamation mark (``<code>!</code>'') to use the underlying
+    platform's native size for the specified type; otherwise, they use a
+    platform-independent size. Spaces are ignored in the template
+    string. See also <code>String#unpack</code>.
+    
+       a = [ "a", "b", "c" ]
+       n = [ 65, 66, 67 ]
+       a.pack("A3A3A3")   #=> "a  b  c  "
+       a.pack("a3a3a3")   #=> "a\000\000b\000\000c\000\000"
+       n.pack("ccc")      #=> "ABC"
+    
+    Directives for +pack+.
+    
+     Integer      | Array   |
+     Directive    | Element | Meaning
+     ---------------------------------------------------------------------------
+        C         | Integer | 8-bit unsigned (unsigned char)
+        S         | Integer | 16-bit unsigned, native endian (uint16_t)
+        L         | Integer | 32-bit unsigned, native endian (uint32_t)
+        Q         | Integer | 64-bit unsigned, native endian (uint64_t)
+                  |         |
+        c         | Integer | 8-bit signed (signed char)
+        s         | Integer | 16-bit signed, native endian (int16_t)
+        l         | Integer | 32-bit signed, native endian (int32_t)
+        q         | Integer | 64-bit signed, native endian (int64_t)
+                  |         |
+        S_, S!    | Integer | unsigned short, native endian
+        I, I_, I! | Integer | unsigned int, native endian
+        L_, L!    | Integer | unsigned long, native endian
+                  |         |
+        s_, s!    | Integer | signed short, native endian
+        i, i_, i! | Integer | signed int, native endian
+        l_, l!    | Integer | signed long, native endian
+                  |         |
+        S> L> Q>  | Integer | same as the directives without ">" except
+        s> l> q>  |         | big endian
+        S!> I!>   |         | (available since Ruby 1.9.3)
+        L!>       |         | "S>" is same as "n"
+        s!> i!>   |         | "L>" is same as "N"
+        l!>       |         |
+                  |         |
+        S< L< Q<  | Integer | same as the directives without "<" except
+        s< l< q<  |         | little endian
+        S!< I!<   |         | (available since Ruby 1.9.3)
+        L!<       |         | "S<" is same as "v"
+        s!< i!<   |         | "L<" is same as "V"
+        l!<       |         |
+                  |         |
+        n         | Integer | 16-bit unsigned, network (big-endian) byte order
+        N         | Integer | 32-bit unsigned, network (big-endian) byte order
+        v         | Integer | 16-bit unsigned, VAX (little-endian) byte order
+        V         | Integer | 32-bit unsigned, VAX (little-endian) byte order
+                  |         |
+        U         | Integer | UTF-8 character
+        w         | Integer | BER-compressed integer
+    
+     Float        |         |
+     Directive    |         | Meaning
+     ---------------------------------------------------------------------------
+        D, d      | Float   | double-precision, native format
+        F, f      | Float   | single-precision, native format
+        E         | Float   | double-precision, little-endian byte order
+        e         | Float   | single-precision, little-endian byte order
+        G         | Float   | double-precision, network (big-endian) byte order
+        g         | Float   | single-precision, network (big-endian) byte order
+    
+     String       |         |
+     Directive    |         | Meaning
+     ---------------------------------------------------------------------------
+        A         | String  | arbitrary binary string (space padded, count is width)
+        a         | String  | arbitrary binary string (null padded, count is width)
+        Z         | String  | same as ``a'', except that null is added with *
+        B         | String  | bit string (MSB first)
+        b         | String  | bit string (LSB first)
+        H         | String  | hex string (high nibble first)
+        h         | String  | hex string (low nibble first)
+        u         | String  | UU-encoded string
+        M         | String  | quoted printable, MIME encoding (see RFC2045)
+        m         | String  | base64 encoded string (see RFC 2045, count is width)
+                  |         | (if count is 0, no line feed are added, see RFC 4648)
+        P         | String  | pointer to a structure (fixed-length string)
+        p         | String  | pointer to a null-terminated string
+    
+     Misc.        |         |
+     Directive    |         | Meaning
+     ---------------------------------------------------------------------------
+        @         | ---     | moves to absolute position
+        X         | ---     | back up a byte
+        x         | ---     | null byte
+:class_methods: 
+- :name: "[]"
+  :arglist: "[](*args)"
+  :comment: |-
+    Returns a new array populated with the given objects.
+    
+      Array.[]( 1, 'a', /^A/ )
+      Array[ 1, 'a', /^A/ ]
+      [ 1, 'a', /^A/ ]
+- :name: try_convert
+  :arglist: Array.try_convert(obj) -> array or nil
+  :comment: |-
+    Try to convert <i>obj</i> into an array, using +to_ary+ method.
+    Returns converted array or +nil+ if <i>obj</i> cannot be converted
+    for any reason. This method can be used to check if an argument is an
+    array.
+    
+       Array.try_convert([1])   #=> [1]
+       Array.try_convert("1")   #=> nil
+    
+       if tmp = Array.try_convert(arg)
+         # the argument is an array
+       elsif tmp = String.try_convert(arg)
+         # the argument is a string
+       end
+- :name: new
+  :arglist: |-
+    Array.new(size=0, obj=nil)
+    Array.new(array)
+    Array.new(size) {|index| block }
+  :comment: |-
+    Regresa un nuevo arreglo. En la primera forma, el nuevo arreglo esta
+    vacío. En la segunda es creada con las copias _size_ de _obj_
+    (es decir, _size_ se referencia al mismo
+    _obj_). La tercera forma crea una copia del arreglo
+    pasado como un parámetro (el arreglo es generado al llamar
+    to_ary en el parámetro). En la última forma, un arreglo
+    del tamaño dado es creado. Cada elemento en este arreglo es
+    calculado pasando el índice del elemento al bloque dado
+    y almacenando el valor devuelto.
+    
+       Array.new
+       Array.new(2)
+       Array.new(5, "A")
+    
+       # only one copy of the object is created
+       a = Array.new(2, Hash.new)
+       a[0]['cat'] = 'feline'
+       a
+       a[1]['cat'] = 'Felix'
+       a
+    
+       # here multiple copies are created
+       a = Array.new(2) { Hash.new }
+       a[0]['cat'] = 'feline'
+       a
+    
+       squares = Array.new(5) {|i| i*i}
+       squares
+    
+       copy = Array.new(squares)
