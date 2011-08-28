@@ -596,7 +596,7 @@
 - :name: "[]"
   :arglist: "[](*args)"
   :comment: |-
-    Returns a new array populated with the given objects.
+    Devuelve un nuevo arreglo poblado con los objetos dados.
     
       Array.[]( 1, 'a', /^A/ )
       Array[ 1, 'a', /^A/ ]
@@ -604,18 +604,18 @@
 - :name: try_convert
   :arglist: Array.try_convert(obj) -> array or nil
   :comment: |-
-    Try to convert <i>obj</i> into an array, using +to_ary+ method.
-    Returns converted array or +nil+ if <i>obj</i> cannot be converted
-    for any reason. This method can be used to check if an argument is an
-    array.
+    Intenta convertir <i>obj</i> en un arreglo, usando el método +to_ary+.
+    Devuelve arreglos convertidos o +nil+ si <i>obj</i> no puede ser convertido
+    por alguna razón. Éste método puede ser usado para revisar si un argumento es un
+    arreglo.
     
        Array.try_convert([1])   #=> [1]
        Array.try_convert("1")   #=> nil
     
        if tmp = Array.try_convert(arg)
-         # the argument is an array
+         # el argumento es un arreglo
        elsif tmp = String.try_convert(arg)
-         # the argument is a string
+         # el argumento es una cadena
        end
 - :name: new
   :arglist: |-
@@ -637,14 +637,14 @@
        Array.new(2)
        Array.new(5, "A")
     
-       # only one copy of the object is created
+       # solo una copia del objeto es creado
        a = Array.new(2, Hash.new)
        a[0]['cat'] = 'feline'
        a
        a[1]['cat'] = 'Felix'
        a
     
-       # here multiple copies are created
+       # aquí múltiples copias son creados
        a = Array.new(2) { Hash.new }
        a[0]['cat'] = 'feline'
        a
