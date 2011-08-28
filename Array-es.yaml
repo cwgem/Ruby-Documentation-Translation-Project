@@ -477,11 +477,11 @@
     ary.collect                  -> an_enumerator
     ary.map                      -> an_enumerator
   :comment: |-
-    Invokes <i>block</i> once for each element of +self+. Creates a
-    new array containing the values returned by the block.
-    See also <code>Enumerable#collect</code>.
+    Invoca <i>block</i> una vez por cada elemento de +self+. Crea un
+    nuevo arreglo conteniendo los valores retornados por el bloque.
+    Vea también <code>Enumerable#collect</code>.
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c", "d" ]
        a.collect {|x| x + "!" }   #=> ["a!", "b!", "c!", "d!"]
@@ -493,11 +493,11 @@
     ary.collect                    -> an_enumerator
     ary.map                        -> an_enumerator
   :comment: |-
-    Invokes the block once for each element of +self+, replacing the
-    element with the value returned by _block_.
-    See also <code>Enumerable#collect</code>.
+    Invoca el bloque una vez por cada elemento de +self+, reemplazando el
+    elemento con el valor retornado por _block_.
+    Vea también <code>Enumerable#collect</code>.
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
        a = [ "a", "b", "c", "d" ]
        a.collect! {|x| x + "!" }
@@ -507,11 +507,11 @@
     ary.select {|item| block } -> new_ary
     ary.select                 -> an_enumerator
   :comment: |-
-    Invokes the block passing in successive elements from +self+,
-    returning an array containing those elements for which the block
-    returns a true value (equivalent to <code>Enumerable#select</code>).
+    Invoca el bloque pasando una sucesión de elementos desde +self+,
+    retornando un arreglo conteniendo esos elementos para el cual el bloque
+    retorna un valor verdadero (equivalente a <code>Enumerable#select</code>).
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
        a = %w{ a b c d e f }
        a.select {|v| v =~ /[aeiou]/}   #=> ["a", "e"]
@@ -520,13 +520,13 @@
     ary.select! {|item| block } -> new_ary or nil
     ary.select!                 -> an_enumerator
   :comment: |-
-    Invokes the block passing in successive elements from
-    +self+, deleting elements for which the block returns a
-    false value. It returns +self+ if changes were made,
-    otherwise it returns <code>nil</code>.
-    See also <code>Array#keep_if</code>
+    Invoca el bloque pasando una sucesión de elementos desde
+    +self+, elimiando los elementos para el cual el bloque retorna un
+    valor falso. Retorna +self+ si los cambios fueron realizados,
+    sino retorna <code>nil</code>.
+    Vea también <code>Array#keep_if</code>
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
 - :name: keep_if
   :arglist: |-
     ary.keep_if {|item| block } -> ary
