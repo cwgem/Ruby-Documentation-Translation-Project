@@ -558,12 +558,12 @@
     ary.delete(obj)            -> obj or nil
     ary.delete(obj) { block }  -> obj or nil
   :comment: |-
-    Deletes items from +self+ that are equal to <i>obj</i>.
-    If any items are found, returns <i>obj</i>.   If
-    the item is not found, returns <code>nil</code>. If the optional
-    code block is given, returns the result of <i>block</i> if the item
-    is not found.  (To remove <code>nil</code> elements and
-    get an informative return value, use #compact!)
+    Elimina items desde +self+ que son iguales a <i>obj</i>.
+    Si no se encuentran items, retorna <i>obj</i>. Si
+    el item no es encontrado, retorna <code>nil</code>. Si el bloque de código
+    opcional es dado, retorna el resultado de <i>block</i> si el item
+    no es encontrado. (Para remover elementos <code>nil</code> y
+    obtener un valor informativo de regreso, usar #compact!)
     
        a = [ "a", "b", "b", "b", "c" ]
        a.delete("b")                   #=> "b"
@@ -573,8 +573,8 @@
 - :name: delete_at
   :arglist: ary.delete_at(index)  -> obj or nil
   :comment: |-
-    Deletes the element at the specified index, returning that element,
-    or <code>nil</code> if the index is out of range. See also
+    Elimina el elemento en el índice especificado, retornando ese elemento,
+    o <code>nil</code> si el índice está fuera de rango. Vea también
     <code>Array#slice!</code>.
     
        a = ["ant", "bat", "cat", "dog"]
