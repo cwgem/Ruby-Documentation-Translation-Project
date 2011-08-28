@@ -79,7 +79,7 @@
        a[4..7]                #=> [ "e" ]
        a[6..10]               #=> nil
        a[-3, 3]               #=> [ "c", "d", "e" ]
-       # special cases
+       # Casos especiales
        a[5]                   #=> nil
        a[5, 1]                #=> []
        a[5..10]               #=> []
@@ -532,11 +532,11 @@
     ary.keep_if {|item| block } -> ary
     ary.keep_if                 -> an_enumerator
   :comment: |-
-    Deletes every element of +self+ for which <i>block</i> evaluates
-    to false.
-    See also <code>Array#select!</code>
+    Elimina cada elemento de +self+ para el que <i>block</i> evalúa
+    si es falso.
+    Vea también <code>Array#select!</code>
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
        a = %w{ a b c d e f }
        a.keep_if {|v| v =~ /[aeiou]/}   #=> ["a", "e"]
