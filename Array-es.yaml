@@ -599,22 +599,22 @@
     ary.reject {|item| block }  -> new_ary
     ary.reject                  -> an_enumerator
   :comment: |-
-    Returns a new array containing the items in +self+
-    for which the block is not true.
-    See also <code>Array#delete_if</code>
+    Retorna un nuevo arreglo conteniendo los items en +self+
+    para el cual el bloque no es verdadero.
+    Vea también <code>Array#delete_if</code>
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
 - :name: reject!
   :arglist: |-
     ary.reject! {|item| block }  -> ary or nil
     ary.reject!                  -> an_enumerator
   :comment: |-
-    Equivalent to <code>Array#delete_if</code>, deleting elements from
-    +self+ for which the block evaluates to true, but returns
-    <code>nil</code> if no changes were made.
-    See also <code>Enumerable#reject</code> and <code>Array#delete_if</code>.
+    Equivalente a <code>Array#delete_if</code>, eliminando elementos desde
+    +self+ para el cual el bloque evalúa a verdadero, pero devuelve
+    <code>nil</code> si ningún cambio fue realizado.
+    Vea también <code>Enumerable#reject</code> y <code>Array#delete_if</code>.
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
 - :name: zip
   :arglist: |-
     ary.zip(arg, ...)                   -> new_ary
