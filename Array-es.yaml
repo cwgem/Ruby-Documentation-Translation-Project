@@ -357,15 +357,15 @@
 - :name: join
   :arglist: ary.join(sep=$,)    -> str
   :comment: |-
-    Returns a string created by converting each element of the array to
-    a string, separated by <i>sep</i>.
+    Retorna una cadena creada a partir de la conversión de cada elemento del arreglo a 
+    una cadena, separada por <i>sep</i>.
     
        [ "a", "b", "c" ].join        #=> "abc"
        [ "a", "b", "c" ].join("-")   #=> "a-b-c"
 - :name: reverse
   :arglist: ary.reverse -> new_ary
   :comment: |-
-    Returns a new array containing +self+'s elements in reverse order.
+    Retorna un nuevo arreglo conteniendo los elementos de +self+ en orden inverso.
     
        [ "a", "b", "c" ].reverse   #=> ["c", "b", "a"]
        [ 1 ].reverse               #=> [1]
