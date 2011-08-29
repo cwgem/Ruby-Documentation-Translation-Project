@@ -4,12 +4,12 @@
     ary.zip(arg, ...) {| arr | block }  -> nil
   :comment: |-
     Convierte cualquier argumento en arreglos, luego une los elementos de
-    +self+ con los elementos correspondiente de cada argumento. Esto
+    +self+ con los elementos correspondientes de cada argumento. Esto
     genera una secuencia de <code>self.size</code> <em>n</em>-elementos
     de arreglos, donde <em>n</em> es uno más que el número de argumentos. Si
     el tamaño de cualquier argumento es menos que <code>enumObj.size</code>,
     el valor <code>nil</code> es suministrado. Si un bloque es dado, es
-    invocado para cada salida de arreglo, si no un arreglo de arreglos es
+    invocado para cada salida de arreglo, sino un arreglo de arreglos es
     devuelto.
    
        a = [ 4, 5, 6 ]
@@ -67,7 +67,7 @@
 - :name: include?
   :arglist: ary.include?(obj)   -> true or false
   :comment: |-
-    Devuelve <code>true</code> si el objeto dado esta presente en
+    Devuelve <code>true</code> si el objeto dado está presente en
     +self+ (es decir, si cualquier objeto <code>==</code> <i>anObject</i>),
     si no <code>false</code>.
     
@@ -82,9 +82,9 @@
     <i>other_ary</i>. Cada objeto en cada arreglo es comparado
     (usando <=>). Si cualquier valor no es
     igual, entonces una desigualdad es el valor devuelto. Si todos los
-    valores encontrados son iguales, entonces el valor devuelto esta basado sobre una
+    valores encontrados son iguales, entonces el valor devuelto está basado sobre una
     comparación de la longitud de los arreglos. Por lo tanto, dos arreglos son
-    ``iguales'' de acuerdo a <code>Array#<=></code> si y solo si ellos tienen
+    ``iguales'' de acuerdo a <code>Array#<=></code> si y sólo si ellos tienen
     la misma longitud y el valor de cada elemento es igual al
     valor del elemento correspondiente en el otro arreglo.
     
