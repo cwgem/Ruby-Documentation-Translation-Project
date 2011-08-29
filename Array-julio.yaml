@@ -99,13 +99,13 @@
     ary.slice(start, length)  -> new_ary or nil
     ary.slice(range)          -> new_ary or nil
   :comment: |-
-    Element Reference---Returns the element at _index_,
-    or returns a subarray starting at _start_ and
-    continuing for _length_ elements, or returns a subarray
-    specified by _range_.
-    Negative indices count backward from the end of the
-    array (-1 is the last element). Returns +nil+ if the index
-    (or starting index) are out of range.
+    Refencia de Elemento---Devuelve el elemento en _index_,
+    o devuelve un subarreglo empezando en _start_ y
+    continuando por _length_ elementos, o devuelve un subarreglo
+    espeficado por _range_.
+    Los índices negativos cuentan en retroceso desde el final del
+    arreglo (-1 es el último elemento). Devuelve +nil+ si el índice
+    (o índice inicial) esta fuera de rango.
     
        a = [ "a", "b", "c", "d", "e" ]
        a[2] +  a[0] + a[1]    #=> "cab"
@@ -125,9 +125,9 @@
     ary.slice!(start, length) -> new_ary or nil
     ary.slice!(range)         -> new_ary or nil
   :comment: |-
-    Deletes the element(s) given by an index (optionally with a length)
-    or by a range. Returns the deleted object (or objects), or
-    <code>nil</code> if the index is out of range.
+    Borra el elemento(s) dado por un índice (opcionalmente con una longitud)
+    o por un rango. Devuelve el objeto borrado (u objetos), o
+    <code>nil</code> si el índice esta fuera de rango.
     
        a = [ "a", "b", "c" ]
        a.slice!(1)     #=> "b"
@@ -139,13 +139,13 @@
 - :name: assoc
   :arglist: ary.assoc(obj)   -> new_ary  or  nil
   :comment: |-
-    Searches through an array whose elements are also arrays
-    comparing _obj_ with the first element of each contained array
-    using obj.==.
-    Returns the first contained array that matches (that
-    is, the first associated array),
-    or +nil+ if no match is found.
-    See also <code>Array#rassoc</code>.
+    Busca a través de un arreglo donde sus elementos son también arreglos
+    comparando _obj_ con el primer elemento de cada arreglo contenido
+    usando obj.==.
+    Devuelve el primer arreglo contenido donde empareje ( es decir,
+    el primer arreglo asociado),
+    o +nil+ si no encuentra su igual.
+    Véase también <code>Array#rassoc</code>.
     
        s1 = [ "colors", "red", "blue", "green" ]
        s2 = [ "letters", "a", "b", "c" ]
@@ -156,10 +156,10 @@
 - :name: rassoc
   :arglist: ary.rassoc(obj) -> new_ary or nil
   :comment: |-
-    Searches through the array whose elements are also arrays. Compares
-    _obj_ with the second element of each contained array using
-    <code>==</code>. Returns the first contained array that matches. See
-    also <code>Array#assoc</code>.
+    Busca a través del arreglo donde sus elementos son también arreglos. Compara
+    _obj_ con el segundo elemento de cada arreglo contenido usando
+    <code>==</code>. Devuelve el primer arreglo contenido que empareje. Véase
+    también <code>Array#assoc</code>.
     
        a = [ [ 1, "one"], [2, "two"], [3, "three"], ["ii", "two"] ]
        a.rassoc("two")    #=> [2, "two"]
@@ -167,8 +167,8 @@
 - :name: +
   :arglist: ary + other_ary   -> new_ary
   :comment: |-
-    Concatenation---Returns a new array built by concatenating the
-    two arrays together to produce a third array.
+    Concadenación---Devuelve un nuevo arreglo construido al concadenar los
+    dos arreglos juntos para producir un tercer arreglo.
     
        [ 1, 2, 3 ] + [ 4, 5 ]    #=> [ 1, 2, 3, 4, 5 ]
 - :name: "*"
