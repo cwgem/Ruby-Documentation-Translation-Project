@@ -54,8 +54,8 @@
     puede ser el arreglo entero) a <i>obj</i>. Un <i>start</i> de
     <code>nil</code> es equivalente a cero. Un <i>length</i> de
     <code>nil</code> es equivalente a <i>self.length</i>. Las últimas tres
-    formas llenan el arreglo con el valor del bloque. Al bloque es
-    pasado el índice absoluto de cada elemento a ser llenado. <revisar>The block is passed the absolute index of each element to be filled.</revisar>
+    formas llenan el arreglo con el valor del bloque. El bloque
+    recibe el índice absoluto de cada elemento a ser llenado.
     Los valores negativos de <i>start</i> cuenta desde el final del arreglo.
     
        a = [ "a", "b", "c", "d" ]
