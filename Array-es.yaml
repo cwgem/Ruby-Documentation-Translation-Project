@@ -620,15 +620,15 @@
     ary.zip(arg, ...)                   -> new_ary
     ary.zip(arg, ...) {| arr | block }  -> nil
   :comment: |-
-    Converts any arguments to arrays, then merges elements of
-    +self+ with corresponding elements from each argument. This
-    generates a sequence of <code>self.size</code> <em>n</em>-element
-    arrays, where <em>n</em> is one more that the count of arguments. If
-    the size of any argument is less than <code>enumObj.size</code>,
-    <code>nil</code> values are supplied. If a block is given, it is
-    invoked for each output array, otherwise an array of arrays is
-    returned.
-    
+    Convierte cualquier argumento en arreglos, luego une los elementos de
+    +self+ con los elementos correspondientes de cada argumento. Esto
+    genera una secuencia de <code>self.size</code> <em>n</em>-elementos
+    de arreglos, donde <em>n</em> es uno más que el número de argumentos. Si
+    el tamaño de cualquier argumento es menos que <code>enumObj.size</code>,
+    el valor <code>nil</code> es suministrado. Si un bloque es dado, es
+    invocado para cada salida de arreglo, sino un arreglo de arreglos es
+    devuelto.
+   
        a = [ 4, 5, 6 ]
        b = [ 7, 8, 9 ]
        [1,2,3].zip(a, b)      #=> [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
@@ -637,16 +637,16 @@
 - :name: transpose
   :arglist: ary.transpose -> new_ary
   :comment: |-
-    Assumes that +self+ is an array of arrays and transposes the
-    rows and columns.
+    Asume que +self+ es un arreglo de arreglos y transpone las
+    filas y columnas.
     
        a = [[1,2], [3,4], [5,6]]
        a.transpose   #=> [[1, 3, 5], [2, 4, 6]]
 - :name: replace
   :arglist: ary.replace(other_ary)  -> ary
   :comment: |-
-    Replaces the contents of +self+ with the contents of
-    <i>other_ary</i>, truncating or expanding if necessary.
+    Reemplaza el contenido de +self+ con el contenido de
+    <i>other_ary</i>, truncando o expandiendo si es necesario.
     
        a = [ "a", "b", "c", "d", "e" ]
        a.replace([ "x", "y", "z" ])   #=> ["x", "y", "z"]
@@ -654,7 +654,7 @@
 - :name: clear
   :arglist: ary.clear    -> ary
   :comment: |-
-    Removes all elements from +self+.
+    Quita todos los elementos de +self+.
     
        a = [ "a", "b", "c", "d", "e" ]
        a.clear    #=> [ ]
@@ -667,13 +667,13 @@
     ary.fill(start [, length] ) {|index| block } -> ary
     ary.fill(range) {|index| block }             -> ary
   :comment: |-
-    The first three forms set the selected elements of +self+ (which
-    may be the entire array) to <i>obj</i>. A <i>start</i> of
-    <code>nil</code> is equivalent to zero. A <i>length</i> of
-    <code>nil</code> is equivalent to <i>self.length</i>. The last three
-    forms fill the array with the value of the block. The block is
-    passed the absolute index of each element to be filled.
-    Negative values of <i>start</i> count from the end of the array.
+    Las primeras tres formas asignan los elementos seleccionados de +self+ (la cual
+    puede ser el arreglo entero) a <i>obj</i>. Un <i>start</i> de
+    <code>nil</code> es equivalente a cero. Un <i>length</i> de
+    <code>nil</code> es equivalente a <i>self.length</i>. Las últimas tres
+    formas llenan el arreglo con el valor del bloque. El bloque
+    recibe el índice absoluto de cada elemento a ser llenado.
+    Los valores negativos de <i>start</i> cuenta desde el final del arreglo.
     
        a = [ "a", "b", "c", "d" ]
        a.fill("x")              #=> ["x", "x", "x", "x"]
@@ -684,9 +684,9 @@
 - :name: include?
   :arglist: ary.include?(obj)   -> true or false
   :comment: |-
-    Returns <code>true</code> if the given object is present in
-    +self+ (that is, if any object <code>==</code> <i>anObject</i>),
-    <code>false</code> otherwise.
+    Devuelve <code>true</code> si el objeto dado está presente en
+    +self+ (es decir, si cualquier objeto <code>==</code> <i>anObject</i>),
+    si no <code>false</code>.
     
        a = [ "a", "b", "c" ]
        a.include?("b")   #=> true
@@ -694,16 +694,16 @@
 - :name: <=>
   :arglist: ary <=> other_ary   ->  -1, 0, +1 or nil
   :comment: |-
-    Comparison---Returns an integer (-1, 0,
-    or +1) if this array is less than, equal to, or greater than
-    <i>other_ary</i>.  Each object in each array is compared
-    (using <=>). If any value isn't
-    equal, then that inequality is the return value. If all the
-    values found are equal, then the return is based on a
-    comparison of the array lengths.  Thus, two arrays are
-    ``equal'' according to <code>Array#<=></code> if and only if they have
-    the same length and the value of each element is equal to the
-    value of the corresponding element in the other array.
+    Comparación---Regresa un entero (-1, 0,
+    o +1) si este arreglo es menor que, igual que, o mayor que 
+    <i>other_ary</i>. Cada objeto en cada arreglo es comparado
+    (usando <=>). Si cualquier valor no es
+    igual, entonces una desigualdad es el valor devuelto. Si todos los
+    valores encontrados son iguales, entonces el valor devuelto está basado sobre una
+    comparación de la longitud de los arreglos. Por lo tanto, dos arreglos son
+    ``iguales'' de acuerdo a <code>Array#<=></code> si y sólo si ellos tienen
+    la misma longitud y el valor de cada elemento es igual al
+    valor del elemento correspondiente en el otro arreglo.
     
        [ "a", "a", "c" ]    <=> [ "a", "b", "c" ]   #=> -1
        [ 1, 2, 3, 4, 5, 6 ] <=> [ 1, 2 ]            #=> +1
