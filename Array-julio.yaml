@@ -99,13 +99,13 @@
     ary.slice(start, length)  -> new_ary or nil
     ary.slice(range)          -> new_ary or nil
   :comment: |-
-    Refencia de Elemento---Devuelve el elemento en _index_,
+    Referencia de Elemento---Devuelve el elemento en _index_,
     o devuelve un subarreglo empezando en _start_ y
     continuando por _length_ elementos, o devuelve un subarreglo
     espeficado por _range_.
     Los índices negativos cuentan en retroceso desde el final del
     arreglo (-1 es el último elemento). Devuelve +nil+ si el índice
-    (o índice inicial) esta fuera de rango.
+    (o índice inicial) está fuera de rango.
     
        a = [ "a", "b", "c", "d", "e" ]
        a[2] +  a[0] + a[1]    #=> "cab"
