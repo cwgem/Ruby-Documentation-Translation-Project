@@ -1,0 +1,584 @@
+--- 
+:name: Object
+:comment: |-
+  Object es la clase superior en jerarquía de Ruby. Sus métodos 
+  están disponibles para el resto de las clases a menos que se 
+  sobreescriba explícitamente.
+
+  Los objetos mezclados en el modulo Kernel, hacen que las funciónes
+  incorporadas sean accesibles globalmente. Aunque los métodos de 
+  instancia de Object son definidos por el módulo Kernel, hemos elegido
+  documentarlos aquí al fin de clarificar.
+
+  En la descripción de métodos para Object, el parámetro <i>symbol</i>
+  hace referencia a symbol, el cuál es texto encomillado o un Symbol (
+  como <code>:name</code>).
+
+:instance_methods: 
+- :name: to_enum
+  :arglist: |-
+    obj.to_enum(method = :each, *args)
+    obj.enum_for(method = :each, *args)
+  :comment: |-
+    Crea un nuevo Enumerator el cual enumera llamando +method+ sobre
+    +obj+.
+
+    +method+:: el método a llamar sobre el +obj+ para generar la enumeración
+    +args+:: argumentos que serán pasados en +method+ <i>en adicción</i> al 
+             item en si mismo. Observar que el número de argumentos no debe
+             exceder de el número esperado por +method+
+
+    === Ejemplo
+    
+      str = "xyz"
+    
+      enum = str.enum_for(:each_byte)
+      enum.each { |b| puts b }
+      # => 120
+      # => 121
+      # => 122
+    
+      # proteje un arreglo de ser modificado por some_method
+      a = [1, 2, 3]
+      some_method(a.to_enum)
+- :name: enum_for
+  :arglist: |-
+    obj.to_enum(method = :each, *args)
+    obj.enum_for(method = :each, *args)
+  :comment: |-
+    Crea un nuevo Enumerator el cuál enumerará llamando +method+ desde +obj+.
+    
+    +method+:: el método a llamar sobre +obj+ para generar la enumeración
+    +args+:: argumentos que serán pasados en +method+ <i>en suma</i>
+             al item en si mismo.  Notar que el número de argumentos no debe
+             exceder el número esperado por +method+
+    
+    === Ejemplo
+    
+      str = "xyz"
+    
+      enum = str.enum_for(:each_byte)
+      enum.each { |b| puts b }
+      # => 120
+      # => 121
+      # => 122
+    
+      # proteje un array de ser modificado por some_method
+      a = [1, 2, 3]
+      some_method(a.to_enum)
+- :name: extend
+  :arglist: obj.extend(module, ...)    -> obj
+  :comment: |-
+    Agrega a _obj_ los métodos de instancia para cada modulo dado
+    como un parametro
+    
+       module Mod
+         def hola
+           "Hola desde Mod.\n"
+         end
+       end
+    
+       class Klass
+         def hola
+           "Hola desde Klass.\n"
+         end
+       end
+    
+       k = Klass.new
+       k.hola         #=> "Hola desde Klass.\n"
+       k.extend(Mod)   #=> #<Klass:0x401b3bc8>
+       k.hola         #=> "Hola desde Mod.\n"
+- :name: object_id
+  :arglist: |-
+    obj.__id__       -> fixnum
+    obj.object_id    -> fixnum
+  :comment: |-
+    Retorna un valor entero identificador para <i>obj</i>. El mismo número
+    se retorna en la llamadas a <code>id</code> para un objeto dado, y dos
+    objetods activos no compartiran un id.
+    <code>Object#object_id</code> es un concepoto diferente de la notación
+    <code>:name</code> la cual retorna el símbolo id de <code>name</code>.
+    Reemplaza el deprecado <code>Object#id</code>.
+
+- :name: display
+  :arglist: obj.display(port=$>)    -> nil
+  :comment: |-
+    Imprime <i>obj</i> en el puerto dado (default <code>$></code>).
+    Equivalente a:
+
+       def display(port=$>)
+         port.write self
+       end
+
+    Por ejemplo:
+    
+       1.display
+       "cat".display
+       [ 4, 5, 6 ].display
+       puts
+    
+    <em>produce:</em>
+    
+       1cat456
+- :name: nil?
+  :arglist: nil?()
+  :comment: |-
+    call_seq:
+      nil.nil?               -> true
+      <anything_else>.nil?   -> false
+    
+    Unicamente el objeto <i>nil</i> responde con <code>true</code> a 
+    <code>nil?</code>.
+- :name: ===
+  :arglist: obj === other   -> true o false
+  :comment: |-
+    Case Equality---Para clase <code>Object</code>, efectivamente lo mismo
+    que llamar <code>#==</code>, pero típicamente sobrescrito por otras 
+    clases descendientes para proveer semántica útil en sentencias 
+    <code>case</code>.
+- :name: =~
+  :arglist: obj =~ other  -> nil
+  :comment: |-
+    Pattern Match---Sobreescrito por clases descendientes (notoriamente
+    <code>Regexp</code> y <code>String</code>) para proveer significado a la
+    semántica de pattern-match.
+- :name: "!~"
+  :arglist: obj !~ other  -> true o false
+  :comment: |-
+    Retorna true si dos objetos no coinciden( usando el método <i>=~</i>), en 
+    caso contrario devolverá false
+- :name: eql?
+  :arglist: |-
+    obj == other        -> true o false
+    obj.equal?(other)   -> true o false
+    obj.eql?(other)     -> true o false
+  :comment: |-
+    Equality---A nivel de <code>Object</code>, <code>==</code> retorna
+    <code>true</code> solamente si <i>obj</i> y <i>other</i> son el
+    mismo objeto. Tipicamente, éste objeto sobreescrito por una clase 
+    descendiente para proveer significado más especifico dentro de la clase.
+    
+    Al contrario de <code>==</code>, el método <code>equal?</code> núnca
+    deberá ser sobreescrito por una subclase: éste es usado para determinar 
+    la identidad del objeto (esto es, <code>a.equal?(b)</code> si <code>a</code> 
+    es el mismo objeto como <code>b</code>).
+    
+    El método <code>eql?</code> retorna <code>true</code> si
+    <i>obj</i> y <i>anObject</i> tienen el mismo valor. Es utilizado por
+    <code>Hash</code> para testear igualdad.  Para objetos de clase
+    <code>Object</code>, <code>eql?</code> es sinónimo con <code>==</code>. 
+    Subclases normalmente continunan esta tradición, pero hay excepciónes. 
+    Tipos <code>Numeric</code>, por ejemplo, realizan la conversión a travez 
+    de <code>==</code>, pero no con <code>eql?</code>, entonces:
+    
+       1 == 1.0     #=> true
+       1.eql? 1.0   #=> false
+- :name: hash
+  :arglist: hash()
+  :comment: |-
+    Genera un valor hash <code>Fixnum</code> para el objeto.
+    Esta funcion debe tener la propiedad que a.eql?(b) implica
+    a.hash <code>==</code> b.hash.
+    El valor hash es usado por la clase <code>Hash</code>.
+    Cualquier valor hash que excede la capacidad de un <code>Fixnum</code> será
+    truncado antes de ser utilizado.
+    
+         "waffle".hash #=> -910576647
+- :name: <=>
+  :arglist: obj <=> other -> 0 o nil
+  :comment: Retorna 0 si obj === other, en otro caso nil.
+- :name: class
+  :arglist: obj.class    -> class
+  :comment: |-
+    Retorna la clase de <i>obj</i>. Éste método deberá ser llamado siempre con
+    con un recibidor explicito, como <code>class</code> es también una palabra 
+    reservada en Ruby.
+    
+       1.class      #=> Fixnum
+       self.class   #=> Object
+- :name: singleton_class
+  :arglist: obj.singleton_class    -> class
+  :comment: |-
+    Retorna la clase singleton de <i>obj</i>.  Éste método crea una nueva clase
+    singleton si <i>obj</i> no lo tiene.
+    
+    Si <i>obj</i> es <code>nil</code>, <code>true</code>, o
+    <code>false</code>, este retorna NilClass, TrueClass, o FalseClass,
+    respectivamente.
+    Si <i>obj</i> es un Fixnum o un Symbol, este muestra un TypeError.
+    
+       Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
+       String.singleton_class      #=> #<Class:String>
+       nil.singleton_class         #=> NilClass
+- :name: clone
+  :arglist: obj.clone -> an_object
+  :comment: |-
+    Produce un copia superficial de <i>obj</i>---las variables de instancia de
+    <i>obj</i> son copiadas, pero no los objetos a los que hace referencia. Copia
+    el estado actual de <i>obj</i>. Vea la referencia relacionada en 
+    <code>Object#dup</code>.
+    
+       class Klass
+          attr_accessor :str
+       end
+       s1 = Klass.new      #=> #<Klass:0x401b3a38>
+       s1.str = "Hola"    #=> "Hola"
+       s2 = s1.clone       #=> #<Klass:0x401b3998 @str="Hola">
+       s2.str[1,4] = "i"   #=> "i"
+       s1.inspect          #=> "#<Klass:0x401b3a38 @str=\"Hi\">"
+       s2.inspect          #=> "#<Klass:0x401b3998 @str=\"Hi\">"
+    
+    Éste método puede tener un un comportamiento especifico de la clase.  Si lo tiene, este
+    estará documentado debajo del #+initialize_copy+ de la clase.
+- :name: dup
+  :arglist: obj.dup -> an_object
+  :comment: |-
+    Produce una copia superficial de <i>obj</i>---las variables de instancia de
+    <i>obj</i> son copiadas, pero no los objetos de referencia.
+    <code>dup</code> copia el estado actual de <i>obj</i>. Vea además
+    en <code>Object#clone</code>. En general, <code>clone</code> y 
+    <code>dup</code> pueden tener diferentes semánticas en clases descendientes.
+    Mientras <code>clone</code> es usado para duplicar un objeto, incluyendo su
+    estado interno, <code>dup</code> comunmente utiliza la clase del objeto 
+    descendiente para crear una nueva instancia.
+    
+    Éste método puede tener un comportamiento expecifico de la clase.
+    Si lo tiene, ese comportamiento estará documentando bano el método
+    #+initialize_copy+ de clase.
+- :name: taint
+  :arglist: obj.taint -> obj
+  :comment: |-
+    Marca <i>obj</i> como marcado---si el nivel <code>$SAFE</code> 
+    seteado correctamente,muchas llamadas al método que podría alterar el 
+    funcionamiento entorno de los programas se negarán a aceptar cadenas 
+    marcadas.
+- :name: tainted?
+  :arglist: obj.tainted?    -> true o false
+  :comment: Retorna <code>true</code> si el objeto es marcado.
+- :name: untaint
+  :arglist: obj.untaint    -> obj
+  :comment: Quita la marca de <i>obj</i>.
+- :name: untrust
+  :arglist: obj.untrust -> obj
+  :comment: Marca <i>obj</i> como no confiable.
+- :name: untrusted?
+  :arglist: obj.untrusted?    -> true o false
+  :comment: Retorna <code>true</code> si el objeto no es confiable.
+- :name: trust
+  :arglist: obj.trust    -> obj
+  :comment: Quita la marca de no confiable de <i>obj</i>.
+- :name: freeze
+  :arglist: obj.freeze    -> obj
+  :comment: |-
+    Impide nuevas modificaiones a <i>obj</i>. Un
+    <code>RuntimeError</code> será mostrado si se intenta una modificación.
+    No hay forma de volver atras un objeto congelado. Vea también 
+    <code>Object#frozen?</code>.
+    
+    Éste método retorna self.
+    
+       a = [ "a", "b", "c" ]
+       a.freeze
+       a << "z"
+    
+    <em>produce:</em>
+    
+       prog.rb:3:in `<<': cann't modify frozen array (RuntimeError)
+        from prog.rb:3
+- :name: frozen?
+  :arglist: obj.frozen?    -> true o false
+  :comment: |-
+    Retorna el estado de si <i>obj</i> esta o no congelado.
+    
+       a = [ "a", "b", "c" ]
+       a.freeze    #=> ["a", "b", "c"]
+       a.frozen?   #=> true
+- :name: to_s
+  :arglist: obj.to_s    -> string
+  :comment: |-
+    Retorna un string representando <i>obj</i>. Por defecto
+    <code>to_s</code> imprime la clase del objeto y un encoding de
+    object id. Un caso especial, el valor del top-level object que es la
+    el contexto de ejecución inicial de programas Ruby retorna ``main.''
+- :name: inspect
+  :arglist: obj.inspect   -> string
+  :comment: |-
+    Retorna un string contentiendo una representación humanamente legible de 
+    <i>obj</i>. Si no es sobreescrito y no tiene variables de instancia, utiliza el
+    método <code>to_s</code> para generar un string.
+    <i>obj</i>.  Si no es sobreescrito , utiliza el método <code>to_s</code> para
+    generar el string.
+    
+       [ 1, 2, 3..4, 'five' ].inspect   #=> "[1, 2, 3..4, \"five\"]"
+       Time.new.inspect                 #=> "2008-03-08 19:43:39 +0900"
+- :name: singleton_methods
+  :arglist: obj.singleton_methods(all=true)    -> array
+  :comment: |-
+    Retorna un arreglo de los nombres de métodos singleton para <i>obj</i>.
+    Si el parámetro opcional <i>all</i> es verdadero, la lista incluira
+    métodos incluidos en módulos en <i>obj</i>.
+    Solo métodos públicos y protegidos singleton son retornados.
+    
+       module Other
+         def three() end
+       end
+    
+       class Single
+         def Single.four() end
+       end
+    
+       a = Single.new
+    
+       def a.one()
+       end
+    
+       class << a
+         include Other
+         def two()
+         end
+       end
+    
+       Single.singleton_methods    #=> [:four]
+       a.singleton_methods(false)  #=> [:two, :one]
+       a.singleton_methods         #=> [:two, :one, :three]
+- :name: instance_variables
+  :arglist: obj.instance_variables    -> array
+  :comment: |-
+    Retorna un array de nombres de variables de instancia del receptor.
+    Vea que simplemente definiendo un acceso no crea la correspondiente
+    variable de instancia.
+    
+       class Fred
+         attr_accessor :a1
+         def initialize
+           @iv = 3
+         end
+       end
+       Fred.new.instance_variables   #=> [:@iv]
+- :name: instance_variable_get
+  :arglist: obj.instance_variable_get(symbol)    -> obj
+  :comment: |-
+    Regresa el valor de una variable dada, o nil si la instancia de
+    la variable no fue establecida. La <code>@</code> debe ser incluida
+    para variables de instancia. Lanza una <code>NameError</code> excepcion si
+    el símbolo provisto no es valido como una instancia de variable.
+    
+       class Fred
+         def initialize(p1, p2)
+           @a, @b = p1, p2
+         end
+       end
+       fred = Fred.new('cat', 99)
+       fred.instance_variable_get(:@a)    #=> "cat"
+       fred.instance_variable_get("@b")   #=> 99
+- :name: instance_variable_set
+  :arglist: obj.instance_variable_set(symbol, obj)    -> obj
+  :comment: |-
+    Establece los nombres de variables de instancia de <i>symbol</i> a
+    <i>object</i>, ante la negativa a esfuerzo de la clase autor para proveer
+    una encapsulación valida. La variable no tiene que existir previo a esta llamada.
+    
+       class Fred
+         def initialize(p1, p2)
+           @a, @b = p1, p2
+         end
+       end
+       fred = Fred.new('cat', 99)
+       fred.instance_variable_set(:@a, 'dog')   #=> "dog"
+       fred.instance_variable_set(:@c, 'cat')   #=> "cat"
+       fred.inspect                             #=> "#<Fred:0x401b3da8 @a=\"dog\", @b=99, @c=\"cat\">"
+- :name: instance_variable_defined?
+  :arglist: obj.instance_variable_defined?(symbol)    -> true o false
+  :comment: |-
+    Retorna <code>true</code> si la variable de instancia dada es definida en 
+    <i>obj</i>.
+    
+       class Fred
+         def initialize(p1, p2)
+           @a, @b = p1, p2
+         end
+       end
+       fred = Fred.new('cat', 99)
+       fred.instance_variable_defined?(:@a)    #=> true
+       fred.instance_variable_defined?("@b")   #=> true
+       fred.instance_variable_defined?("@c")   #=> false
+- :name: remove_instance_variable
+  :arglist: obj.remove_instance_variable(symbol)    -> obj
+  :comment: |-
+    Quita la variable de instancia nombrada desde <i>obj</i>, retorando
+    el valor que tiene la variable.
+    
+       class Dummy
+         attr_reader :var
+         def initialize
+           @var = 99
+         end
+         def remove
+           remove_instance_variable(:@var)
+         end
+       end
+       d = Dummy.new
+       d.var      #=> 99
+       d.remove   #=> 99
+       d.var      #=> nil
+- :name: instance_of?
+  :arglist: obj.instance_of?(class)    -> true o false
+  :comment: |-
+    Retorna <code>true</code> si <i>obj</i> es una instancia de la clase dada. 
+    Vea también <code>Object#kind_of?</code>.
+- :name: kind_of?
+  :arglist: |-
+    obj.is_a?(class)       -> true o false
+    obj.kind_of?(class)    -> true o false
+  :comment: |-
+    Retorna <code>true</code> si <i>class</i> es la clase de
+    <i>obj</i>, o si <i>class</i> es una de las superclases de
+    <i>obj</i> o modulos incluidos en <i>obj</i>.
+    
+       module M;    end
+       class A
+         include M
+       end
+       class B < A; end
+       class C < B; end
+       b = B.new
+       b.instance_of? A   #=> false
+       b.instance_of? B   #=> true
+       b.instance_of? C   #=> false
+       b.instance_of? M   #=> false
+       b.kind_of? A       #=> true
+       b.kind_of? B       #=> true
+       b.kind_of? C       #=> false
+       b.kind_of? M       #=> true
+- :name: is_a?
+  :arglist: |-
+    obj.is_a?(class)       -> true o false
+    obj.kind_of?(class)    -> true o false
+  :comment: |-
+    Regresa <code>true</code> si <i>class</i> es la clase de
+    <i>obj</i>, o si <i>class</i> es una de las superclasses de
+    <i>obj</i> o modulos incluidos en <i>obj</i>.
+    
+       module M;    end
+       class A
+         include M
+       end
+       class B < A; end
+       class C < B; end
+       b = B.new
+       b.instance_of? A   #=> false
+       b.instance_of? B   #=> true
+       b.instance_of? C   #=> false
+       b.instance_of? M   #=> false
+       b.kind_of? A       #=> true
+       b.kind_of? B       #=> true
+       b.kind_of? C       #=> false
+       b.kind_of? M       #=> true
+- :name: tap
+  :arglist: obj.tap{|x|...}    -> obj
+  :comment: |-
+    Encierra <code>x</code> en el bloque, y luego regresa <code>x</code>.
+    El primer proposito de este método es "aprovechar", con el fin de realizar
+    operaciones en los resultados intermedios de la cadena.
+    
+        (1..10)                .tap {|x| puts "original: #{x.inspect}"}
+          .to_a                .tap {|x| puts "array: #{x.inspect}"}
+          .select {|x| x%2==0} .tap {|x| puts "evens: #{x.inspect}"}
+          .map { |x| x*x }     .tap {|x| puts "squares: #{x.inspect}"}
+- :name: method
+  :arglist: obj.method(sym)    -> method
+  :comment: |-
+    Busca el método pasado como receptor en <i>obj</i>, retornando un objeto
+    <code>Method</code> (o mostrando <code>NameError</code>). El objeto
+    <code>Method</code> actua como un cierre para la instancia <i>obj</i>
+    , entonces las variables de instancia y el valor de <code>self</code> 
+    permanecen disponibles.
+    
+       class Demo
+         def initialize(n)
+           @iv = n
+         end
+         def hola()
+           "Hola, @iv = #{@iv}"
+         end
+       end
+    
+       k = Demo.new(99)
+       m = k.method(:hola)
+       m.call   #=> "Hola, @iv = 99"
+    
+       l = Demo.new('Fred')
+       m = l.method("hola")
+       m.call   #=> "Hola, @iv = Fred"
+- :name: public_method
+  :arglist: obj.public_method(sym)    -> method
+  :comment: Similar a _method_, busca solo métodos públicos.
+- :name: define_singleton_method
+  :arglist: |-
+    define_singleton_method(symbol, method) -> new_method
+    define_singleton_method(symbol) { block } -> proc
+  :comment: |-
+    Define un método singleton en el receptor. El parametro _method_
+    puede ser +Proc+, un +Method+ o un objeto +UnboundMethod+ .
+    Si un bloque es especificado, este es usado como el método.
+    
+       class A
+         class << self
+           def class_name
+             to_s
+           end
+         end
+       end
+       A.define_singleton_method(:who_am_i) do
+         "Soy: #{class_name}"
+       end
+       A.who_am_i   # ==> "Soy: A"
+    
+       guy = "Bob"
+       guy.define_singleton_method(:hola) { "#{self}: Hola ahí!" }
+       guy.hola    #=>  "Bob: Hola ahí!"
+- :name: send
+  :arglist: |-
+    obj.send(symbol [, args...])        -> obj
+    obj.__send__(symbol [, args...])      -> obj
+  :comment: |-
+    Invoca el método identificado por  _symbol_, pasando a este
+    cualquier argumento especificado. Usted puede usar <code>__send__</code> si el nombre
+    +send+ se enfrenta a un método existente en _obj_.
+    
+       class Klass
+         def hola(*args)
+           "Hola " + args.join(' ')
+         end
+       end
+       k = Klass.new
+       k.send :hola, "gentiles", "lectores"   #=> "Hola gentiles lectores"
+- :name: public_send
+  :arglist: obj.public_send(symbol [, args...])  -> obj
+  :comment: |-
+    Invoca un método identificado por _symbol_, pasandole cualquier
+    argumento specificado. No como send, public_send llama solo mátodos publicos.
+    
+       1.public_send(:puts, "hola")  # causes NoMethodError
+- :name: respond_to?
+  :arglist: obj.respond_to?(symbol, include_private=false) -> true o false
+  :comment: |-
+    Retorna +true+ si _obj_ responde al método dado. Métodos previamente son 
+    incluidos en la búsquesa solo si el segundo parámetro opcional evaluado 
+    es +true+.
+    
+    Si el método no esta implementado,como Process.fork en Windows, File.lchmod en GNU/Linux, etc.,
+    false es el valor retornado.
+    
+    Si el método no es definido , el método <code>respond_to_missing?</code>
+    es llamado y el resultado es retornado.
+- :name: respond_to_missing?
+  :arglist: obj.respond_to_missing?(symbol, include_private) -> true o false
+  :comment: |-
+    
+    Método para retornar si el _obj_ puede responder a un método _id_
+    o no.
+    
+    See #respond_to?.
+:class_methods: []
+
