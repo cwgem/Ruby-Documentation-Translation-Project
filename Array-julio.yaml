@@ -176,15 +176,19 @@
     ary * int     -> new_ary
     ary * str     -> new_string
   :comment: |-
-    Repetition---With a String argument, equivalent to
-    self.join(str). Otherwise, returns a new array
-    built by concatenating the _int_ copies of +self+.
+    Repetición---Con un argumento Cadena, equivalente a
+    self.join(str). Si no, devuelve un nuevo arreglo
+    construido al concadenar las copias _int_ de +self+.
     
        [ 1, 2, 3 ] * 3    #=> [ 1, 2, 3, 1, 2, 3, 1, 2, 3 ]
        [ 1, 2, 3 ] * ","  #=> "1,2,3"
 - :name: "-"
   :arglist: ary - other_ary    -> new_ary
   :comment: |-
+    Arreglo Diferencial---Devuelve un nuevo arreglo donde es una copia
+    del arreglo original, removiendo cualquier artículo que aparezca también en
+    <i>other_ary</i>. (Si necesitas el comportamiento set-like, véase
+    la librería de clases Set.)
     Array Difference---Returns a new array that is a copy of
     the original array, removing any items that also appear in
     <i>other_ary</i>. (If you need set-like behavior, see the
