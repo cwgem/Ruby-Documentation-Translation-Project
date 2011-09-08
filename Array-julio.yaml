@@ -198,22 +198,22 @@
 - :name: "&"
   :arglist: ary & other_ary      -> new_ary
   :comment: |-
-    Set Intersection---Returns a new array
-    containing elements common to the two arrays, with no duplicates.
+    Asigna Intersección---Devuelve un nuevo arreglo
+    conteniendo elementos comúnes a los dos arreglos, sin duplicados.
     
        [ 1, 1, 3, 5 ] & [ 1, 2, 3 ]   #=> [ 1, 3 ]
 - :name: "|"
   :arglist: ary | other_ary     -> new_ary
   :comment: |-
-    Set Union---Returns a new array by joining this array with
-    <i>other_ary</i>, removing duplicates.
+    Asigna Unión---Devuelve un nuevo arreglo uniendo éste arreglo con
+    <i>other_ary</i>, removiendo duplicados.
     
        [ "a", "b", "c" ] | [ "c", "d", "a" ]
               #=> [ "a", "b", "c", "d" ]
 - :name: uniq
   :arglist: ary.uniq   -> new_ary
   :comment: |-
-    Returns a new array by removing duplicate values in +self+.
+    Devuelve un nuevo arreglo removiendo valores duplicados en +self+.
     
        a = [ "a", "a", "b", "b", "c" ]
        a.uniq   #=> ["a", "b", "c"]
@@ -222,9 +222,9 @@
 - :name: uniq!
   :arglist: ary.uniq! -> ary or nil
   :comment: |-
-    Removes duplicate elements from +self+.
-    Returns <code>nil</code> if no changes are made (that is, no
-    duplicates are found).
+    Remueve elementos duplicados de +self+.
+    Devuelve <code>nil</code> si ningún cambio es realizado (es decir, no
+    se encontró duplicados).
     
        a = [ "a", "a", "b", "b", "c" ]
        a.uniq!   #=> ["a", "b", "c"]
