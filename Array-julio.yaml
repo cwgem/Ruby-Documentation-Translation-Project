@@ -176,7 +176,7 @@
     ary * int     -> new_ary
     ary * str     -> new_string
   :comment: |-
-    Repetición---Con un argumento Cadena, equivalente a
+    Repetición---Con un argumento String, equivalente a
     self.join(str). Si no, devuelve un nuevo arreglo
     construido al concadenar las copias _int_ de +self+.
     
@@ -235,15 +235,15 @@
 - :name: compact
   :arglist: ary.compact     -> new_ary
   :comment: |-
-    Returns a copy of +self+ with all +nil+ elements removed.
+    Devuelve una copia de +self+ con todos los elementos +nil+ removidos.
     
        [ "a", nil, "b", nil, "c", nil ].compact
                          #=> [ "a", "b", "c" ]
 - :name: compact!
   :arglist: ary.compact!    -> ary  or  nil
   :comment: |-
-    Removes +nil+ elements from the array.
-    Returns +nil+ if no changes were made, otherwise returns
+    Remueve los elementos +nil+ del arreglo.
+    Devuelve +nil+ si no se realizó ningún cambio, de lo contrario devuelve
     <i>ary</i>.
     
        [ "a", nil, "b", nil, "c" ].compact! #=> [ "a", "b", "c" ]
@@ -253,10 +253,10 @@
     ary.flatten -> new_ary
     ary.flatten(level) -> new_ary
   :comment: |-
-    Returns a new array that is a one-dimensional flattening of this
-    array (recursively). That is, for every element that is an array,
-    extract its elements into the new array.  If the optional
-    <i>level</i> argument determines the level of recursion to flatten.
+    Retorna un nuevo arreglo que es una versión unidimensional de este
+    arreglo (recursivamente). Es decir, por cada elemento donde es un arreglo,
+    se extrae sus elementos a un nuevo arreglo. Si el argumento de
+    <i>nivel</i> opcional determina el nivel de recursión a reducir.
     
        s = [ 1, 2, 3 ]           #=> [1, 2, 3]
        t = [ 4, 5, 6, [7, 8] ]   #=> [4, 5, 6, [7, 8]]
@@ -269,10 +269,13 @@
     ary.flatten!        -> ary or nil
     ary.flatten!(level) -> array or nil
   :comment: |-
+    Reduce +self+ en su lugar.
+    Devuelve <code>nil</code> si no se realizó ninguna modificación (por ejemplo,
+    <i>ary</i> no contiene subarreglos.) 
     Flattens +self+ in place.
     Returns <code>nil</code> if no modifications were made (i.e.,
-    <i>ary</i> contains no subarrays.)  If the optional <i>level</i>
-    argument determines the level of recursion to flatten.
+    <i>ary</i> contains no subarrays.)  Si el argumento de <i>nivel</i>
+    opcional determina el nivel de recursión a reducir.
     
        a = [ 1, 2, [3, [4, 5] ] ]
        a.flatten!   #=> [1, 2, 3, 4, 5]
@@ -286,9 +289,9 @@
     ary.count(obj) -> int
     ary.count { |item| block }  -> int
   :comment: |-
-    Returns the number of elements.  If an argument is given, counts
-    the number of elements which equals to <i>obj</i>.  If a block is
-    given, counts the number of elements yielding a true value.
+    Devuelve el número de elementos. Si un argumento es dado, cuenta
+    el número de elementos iguales a <i>obj</i>. Si un bloque es
+    dado, cuenta el número de elementos que arrojan un valor true.
     
        ary = [1, 2, 4, 2]
        ary.count             #=> 4
@@ -299,19 +302,19 @@
     ary.shuffle!              -> ary
     ary.shuffle!(random: rng) -> ary
   :comment: |-
-    Shuffles elements in +self+ in place.
-    If +rng+ is given, it will be used as the random number generator.
+    Mezcla los elementos en +self+ en su lugar.
+    Si +rng+ es dado, será usado como el generador aleatorio de números.
 - :name: shuffle
   :arglist: |-
     ary.shuffle              -> new_ary
     ary.shuffle(random: rng) -> new_ary
   :comment: |-
-    Returns a new array with elements of this array shuffled.
+    Devuelve un nuevo arreglo con elementos del arreglo mezclado.
     
        a = [ 1, 2, 3 ]           #=> [1, 2, 3]
        a.shuffle                 #=> [2, 3, 1]
     
-    If +rng+ is given, it will be used as the random number generator.
+    Si +rng+ es dado, será usado como el generador aleatorio de números.
     
        a.shuffle(random: Random.new(1))  #=> [1, 3, 2]
 - :name: sample
@@ -321,27 +324,27 @@
     ary.sample(n)               -> new_ary
     ary.sample(n, random: rng)  -> new_ary
   :comment: |-
-    Choose a random element or +n+ random elements from the array. The elements
-    are chosen by using random and unique indices into the array in order to
-    ensure that an element doesn't repeat itself unless the array already
-    contained duplicate elements. If the array is empty the first form returns
-    <code>nil</code> and the second form returns an empty array.
-    
-    If +rng+ is given, it will be used as the random number generator.
+    Elige un elemento aleatorio o +n+ elementos aleatorios del arreglo. Los elementos
+    son escogidos usando índices aleatorios y únicos dentro del arreglo para poder asegurar
+    que el elemento no se repite en si mismo a menos que el arreglo ya contenga
+    elementos duplicados. Si el arreglo está vacío la primera forma devuelve
+    <code>nil</code> y la segunda forma devuelve un arreglo vacío.
+
+    Si +rng+ es dado, será usado como el generador aleatorio de números.
 - :name: cycle
   :arglist: |-
     ary.cycle(n=nil) {|obj| block }  -> nil
     ary.cycle(n=nil)                 -> an_enumerator
   :comment: |-
-    Calls <i>block</i> for each element repeatedly _n_ times or
-    forever if none or +nil+ is given.  If a non-positive number is
-    given or the array is empty, does nothing.  Returns +nil+ if the
-    loop has finished without getting interrupted.
-    
-    If no block is given, an enumerator is returned instead.
+    Llama <i>block</i> por cada elemento repetidamente _n_ veces o
+    siempre si nada o +nil+ es dado. Si un número negativo es 
+    dado o el arreglo está vacío, no hace nada. Retorna +nil+ si el
+    ciclo ha terminado sin ser interrumpido.
+
+    Si ningún bloque es dado, se devuelve un enumerador.
     
        a = ["a", "b", "c"]
-       a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+       a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. siempre.
        a.cycle(2) {|x| puts x }  # print, a, b, c, a, b, c.
 - :name: permutation
   :arglist: |-
@@ -350,23 +353,23 @@
     ary.permutation(n) { |p| block }       -> ary
     ary.permutation(n)                     -> an_enumerator
   :comment: |-
-    When invoked with a block, yield all permutations of length <i>n</i>
-    of the elements of <i>ary</i>, then return the array itself.
-    If <i>n</i> is not specified, yield all permutations of all elements.
-    The implementation makes no guarantees about the order in which
-    the permutations are yielded.
+    Cuando es invocado con un bloque, arroja toda variante de longitud <i>n</i>
+    de los elementos de <i>ary</i>, entonces devuelve el propio arreglo.
+    Si <i>n</i> no está espeficado, arroja toda variante de todos los elementos.
+    La implementación no garantiza el orden en la cual
+    las variantes son arrojados.
+
+    Si ningún bloque es dado, se devuelve un enumerador.
     
-    If no block is given, an enumerator is returned instead.
-    
-    Examples:
+    Ejemplos:
     
         a = [1, 2, 3]
         a.permutation.to_a     #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
         a.permutation(1).to_a  #=> [[1],[2],[3]]
         a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
         a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-        a.permutation(0).to_a  #=> [[]] # one permutation of length 0
-        a.permutation(4).to_a  #=> []   # no permutations of length 4
+        a.permutation(0).to_a  #=> [[]] # una variante de longitud 0
+        a.permutation(4).to_a  #=> []   # sin variantes de longitud 4
 - :name: combination
   :arglist: |-
     ary.combination(n) { |c| block }    -> ary
