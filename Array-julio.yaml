@@ -375,22 +375,22 @@
     ary.combination(n) { |c| block }    -> ary
     ary.combination(n)                  -> an_enumerator
   :comment: |-
-    When invoked with a block, yields all combinations of length <i>n</i>
-    of elements from <i>ary</i> and then returns <i>ary</i> itself.
-    The implementation makes no guarantees about the order in which
-    the combinations are yielded.
+    Cuando es invocado con un bloque, produce todas las combinaciones de la longitud de <i>n</i>
+    elementos desde <i>ary</i> y luego retorna el mismo <i>ary</i>.
+    La implementación no garantiza el orden en el cual
+    las combinaciones son producidas.
     
-    If no block is given, an enumerator is returned instead.
+    Si ningún bloque es dado, un enumerador es devuelto en su lugar.
     
-    Examples:
+    Ejemplos:
     
         a = [1, 2, 3, 4]
         a.combination(1).to_a  #=> [[1],[2],[3],[4]]
         a.combination(2).to_a  #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
         a.combination(3).to_a  #=> [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
         a.combination(4).to_a  #=> [[1,2,3,4]]
-        a.combination(0).to_a  #=> [[]] # one combination of length 0
-        a.combination(5).to_a  #=> []   # no combinations of length 5
+        a.combination(0).to_a  #=> [[]] # una combinación de longitud 0
+        a.combination(5).to_a  #=> []   # sin combinaciones de longitud 5
 - :name: repeated_permutation
   :arglist: |-
     ary.repeated_permutation(n) { |p| block } -> ary
