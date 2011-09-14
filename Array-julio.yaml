@@ -396,35 +396,33 @@
     ary.repeated_permutation(n) { |p| block } -> ary
     ary.repeated_permutation(n)               -> an_enumerator
   :comment: |-
-    When invoked with a block, yield all repeated permutations of length
-    <i>n</i> of the elements of <i>ary</i>, then return the array itself.
-    The implementation makes no guarantees about the order in which
-    the repeated permutations are yielded.
-    
-    If no block is given, an enumerator is returned instead.
-    
-    Examples:
+    Cuando es invocado con un bloque, arroja todas las variantes repetidas de longitud
+    <i>n</i> de los elementos de <i>ary</i>, luego retorna el arreglo.
+    La implementación no garantiza el orden en que
+    las variantes repetidas sean arrojados.
+
+    Si ningún bloque es dado, se retorna un enumerador.    
+    Ejemplos:
     
         a = [1, 2]
         a.repeated_permutation(1).to_a  #=> [[1], [2]]
         a.repeated_permutation(2).to_a  #=> [[1,1],[1,2],[2,1],[2,2]]
         a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
                                         #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
-        a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
+        a.repeated_permutation(0).to_a  #=> [[]] # una variante de longitud 0
 - :name: repeated_combination
   :arglist: |-
     ary.repeated_combination(n) { |c| block } -> ary
     ary.repeated_combination(n)               -> an_enumerator
   :comment: |-
-    When invoked with a block, yields all repeated combinations of
-    length <i>n</i> of elements from <i>ary</i> and then returns
-    <i>ary</i> itself.
-    The implementation makes no guarantees about the order in which
-    the repeated combinations are yielded.
+    Cuando es invocado con un bloque, arroja todas las combinaciones repetidas de
+    longitud <i>n</i> de los elementos de <i>ary</i> y luego retorna
+    al mismo <i>ary</i>.
+    La implementación no garantiza el orden en que
+    las variantes repetidas sean arrojados.
     
-    If no block is given, an enumerator is returned instead.
-    
-    Examples:
+    Si ningún bloque es dado, se retorna un enumerador.  
+    Ejemplos:
     
         a = [1, 2, 3]
         a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
@@ -434,7 +432,7 @@
         a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3],
                                         #    [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3],
                                         #    [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]]
-        a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
+        a.repeated_combination(0).to_a  #=> [[]] # una combinación de longitud 0
 - :name: product
   :arglist: |-
     ary.product(other_ary, ...)                -> new_ary
