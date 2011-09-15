@@ -167,7 +167,7 @@
 - :name: +
   :arglist: ary + other_ary   -> new_ary
   :comment: |-
-    Concadenación---Devuelve un nuevo arreglo construido al concadenar los
+    Concatenación---Devuelve un nuevo arreglo construido al concatenar los
     dos arreglos juntos para producir un tercer arreglo.
     
        [ 1, 2, 3 ] + [ 4, 5 ]    #=> [ 1, 2, 3, 4, 5 ]
@@ -177,7 +177,7 @@
     ary * str     -> new_string
   :comment: |-
     Repetición---Con un argumento String, equivalente a
-    self.join(str). Si no, devuelve un nuevo arreglo
+    self.join(str). Sino, devuelve un nuevo arreglo
     construido al concadenar las copias _int_ de +self+.
     
        [ 1, 2, 3 ] * 3    #=> [ 1, 2, 3, 1, 2, 3, 1, 2, 3 ]
@@ -185,21 +185,17 @@
 - :name: "-"
   :arglist: ary - other_ary    -> new_ary
   :comment: |-
-    Arreglo Diferencial---Devuelve un nuevo arreglo donde es una copia
+    Arreglo Diferencial---Devuelve un nuevo arreglo que es una copia
     del arreglo original, removiendo cualquier artículo que aparezca también en
-    <i>other_ary</i>. (Si necesitas el comportamiento set-like, véase
+    <i>other_ary</i>. (Si necesita el comportamiento set-like, véase
     la librería de clases Set.)
-    Array Difference---Returns a new array that is a copy of
-    the original array, removing any items that also appear in
-    <i>other_ary</i>. (If you need set-like behavior, see the
-    library class Set.)
     
        [ 1, 1, 2, 2, 3, 3, 4, 5 ] - [ 1, 2, 4 ]  #=>  [ 3, 3, 5 ]
 - :name: "&"
   :arglist: ary & other_ary      -> new_ary
   :comment: |-
     Asigna Intersección---Devuelve un nuevo arreglo
-    conteniendo elementos comúnes a los dos arreglos, sin duplicados.
+    conteniendo elementos comunes a los dos arreglos, sin duplicados.
     
        [ 1, 1, 3, 5 ] & [ 1, 2, 3 ]   #=> [ 1, 3 ]
 - :name: "|"
@@ -269,13 +265,10 @@
     ary.flatten!        -> ary or nil
     ary.flatten!(level) -> array or nil
   :comment: |-
-    Reduce +self+ en su lugar.
-    Devuelve <code>nil</code> si no se realizó ninguna modificación (por ejemplo,
-    <i>ary</i> no contiene subarreglos.) 
-    Flattens +self+ in place.
-    Returns <code>nil</code> if no modifications were made (i.e.,
-    <i>ary</i> contains no subarrays.)  Si el argumento de <i>nivel</i>
-    opcional determina el nivel de recursión a reducir.
+    Reduce +self+ en el mismo arreglo.
+    Devuelve <code>nil</code> si no se realizaron modificaciones (por ejemplo,
+    <i>ary</i> no contiene subarreglos.) Si el argumento de <i>nivel</i>
+    opcional determina el nivel de recusión a reducir.
     
        a = [ 1, 2, [3, [4, 5] ] ]
        a.flatten!   #=> [1, 2, 3, 4, 5]
@@ -302,7 +295,7 @@
     ary.shuffle!              -> ary
     ary.shuffle!(random: rng) -> ary
   :comment: |-
-    Mezcla los elementos en +self+ en su lugar.
+    Mezcla los elementos en +self+ en el mismo arreglo.
     Si +rng+ es dado, será usado como el generador aleatorio de números.
 - :name: shuffle
   :arglist: |-
@@ -326,7 +319,7 @@
   :comment: |-
     Elige un elemento aleatorio o +n+ elementos aleatorios del arreglo. Los elementos
     son escogidos usando índices aleatorios y únicos dentro del arreglo para poder asegurar
-    que el elemento no se repite en si mismo a menos que el arreglo ya contenga
+    que el elemento no se repite en sí mismo a menos que el arreglo ya contenga
     elementos duplicados. Si el arreglo está vacío la primera forma devuelve
     <code>nil</code> y la segunda forma devuelve un arreglo vacío.
 
@@ -357,7 +350,7 @@
     de los elementos de <i>ary</i>, entonces devuelve el propio arreglo.
     Si <i>n</i> no está espeficado, arroja toda variante de todos los elementos.
     La implementación no garantiza el orden en la cual
-    las variantes son arrojados.
+    las variantes son arrojadas.
 
     Si ningún bloque es dado, se devuelve un enumerador.
     
@@ -504,30 +497,19 @@
 - :name: pack
   :arglist: arr.pack ( aTemplateString ) -> aBinaryString
   :comment: |-
-    Empaqueta el contendio de <i>arr</i> en una secuencia binaria de acuerdo a
-    los directorios en <i>aTemplateString</i> (vea la tabla debajo)
-    Directorios ``A,'' ``a,'' y ``Z'' pueden ser seguidos por una cuenta,
-    la cual da el ancho del campo resultante. Los directorios restante
+    Empaqueta el contenido de <i>arr</i> en una secuencia binaria de acuerdo a
+    las directivas en <i>aTemplateString</i> (vea la tabla debajo)
+    Directivas ``A,'' ``a,'' y ``Z'' pueden estar seguidas por una cuenta,
+    la cual da el ancho del campo resultante. Las directivas restantes
     también pueden tomar una cuenta, indicando el número de elementos 
     arreglo a convertir. Si la cuenta es un asterisco
-    (``<code>*</code>''), todos los elementos arreglo restante serán
-    convertidos. Cualquier directorio  ``<code>sSiIlL</code>'' pueden ser
-    seguidos de un underscore (``<code>_</code>'') o
-    un signo de exclamación (``<code>!</code>'') para usar 
-
-    Packs the contents of <i>arr</i> into a binary sequence according to
-    the directives in <i>aTemplateString</i> (see the table below)
-    Directives ``A,'' ``a,'' and ``Z'' may be followed by a count,
-    which gives the width of the resulting field. The remaining
-    directives also may take a count, indicating the number of array
-    elements to convert. If the count is an asterisk
-    (``<code>*</code>''), all remaining array elements will be
-    converted. Any of the directives ``<code>sSiIlL</code>'' may be
-    followed by an underscore (``<code>_</code>'') or
-    exclamation mark (``<code>!</code>'') to use the underlying
-    platform's native size for the specified type; otherwise, they use a
-    platform-independent size. Spaces are ignored in the template
-    string. See also <code>String#unpack</code>.
+    (``<code>*</code>''), todos los elementos arreglo restantes serán
+    convertidos. Cualquier directorio  ``<code>sSiIlL</code>'' puede ser
+    seguido de un underscore (``<code>_</code>'') o
+    un signo de exclamación (``<code>!</code>'') para usar el tamaño nativo
+    de la plataforma subyacente para el tipo especificado; de otra forma, usarán
+    un tamaño independiente de la plataforma. Los espacios son ignorados en la plantilla
+    String. Veáse también <code>String#unpack</code>.
     
        a = [ "a", "b", "c" ]
        n = [ 65, 66, 67 ]
@@ -535,84 +517,84 @@
        a.pack("a3a3a3")   #=> "a\000\000b\000\000c\000\000"
        n.pack("ccc")      #=> "ABC"
     
-    Directives for +pack+.
+    Directivas para +pack+.
     
-     Integer      | Array   |
-     Directive    | Element | Meaning
+     Entero       | Arreglo  |
+     Directiva    | Elemento | Meaning
      ---------------------------------------------------------------------------
-        C         | Entero  | 8-bit unsigned (unsigned char)
-        S         | Entero  | 16-bit unsigned, native endian (uint16_t)
-        L         | Entero  | 32-bit unsigned, native endian (uint32_t)
-        Q         | Entero  | 64-bit unsigned, native endian (uint64_t)
-                  |         |
-        c         | Entero  | 8-bit signed (signed char)
-        s         | Entero  | 16-bit signed, native endian (int16_t)
-        l         | Entero  | 32-bit signed, native endian (int32_t)
-        q         | Entero  | 64-bit signed, native endian (int64_t)
-                  |         |
-        S_, S!    | Entero  | unsigned short, native endian
-        I, I_, I! | Entero  | unsigned int, native endian
-        L_, L!    | Entero  | unsigned long, native endian
-                  |         |
-        s_, s!    | Entero  | signed short, native endian
-        i, i_, i! | Entero  | signed int, native endian
-        l_, l!    | Entero  | signed long, native endian
-                  |         |
-        S> L> Q>  | Entero  | same as the directives without ">" except
-        s> l> q>  |         | big endian
-        S!> I!>   |         | (available since Ruby 1.9.3)
-        L!>       |         | "S>" is same as "n"
-        s!> i!>   |         | "L>" is same as "N"
-        l!>       |         |
-                  |         |
-        S< L< Q<  | Entero  | same as the directives without "<" except
-        s< l< q<  |         | little endian
-        S!< I!<   |         | (available since Ruby 1.9.3)
-        L!<       |         | "S<" is same as "v"
-        s!< i!<   |         | "L<" is same as "V"
-        l!<       |         |
-                  |         |
-        n         | Entero  | 16-bit unsigned, network (big-endian) byte order
-        N         | Entero  | 32-bit unsigned, network (big-endian) byte order
-        v         | Entero  | 16-bit unsigned, VAX (little-endian) byte order
-        V         | Entero  | 32-bit unsigned, VAX (little-endian) byte order
-                  |         |
-        U         | Entero  | UTF-8 character
-        w         | Entero  | BER-compressed integer
+        C         | Entero   | 8-bit unsigned (unsigned char)
+        S         | Entero   | 16-bit unsigned, native endian (uint16_t)
+        L         | Entero   | 32-bit unsigned, native endian (uint32_t)
+        Q         | Entero   | 64-bit unsigned, native endian (uint64_t)
+                  |          |
+        c         | Entero   | 8-bit signed (signed char)
+        s         | Entero   | 16-bit signed, native endian (int16_t)
+        l         | Entero   | 32-bit signed, native endian (int32_t)
+        q         | Entero   | 64-bit signed, native endian (int64_t)
+                  |          |
+        S_, S!    | Entero   | unsigned short, native endian
+        I, I_, I! | Entero   | unsigned int, native endian
+        L_, L!    | Entero   | unsigned long, native endian
+                  |          |
+        s_, s!    | Entero   | signed short, native endian
+        i, i_, i! | Entero   | signed int, native endian
+        l_, l!    | Entero   | signed long, native endian
+                  |          |
+        S> L> Q>  | Entero   | same as the directives without ">" except
+        s> l> q>  |          | big endian
+        S!> I!>   |          | (available since Ruby 1.9.3)
+        L!>       |          | "S>" is same as "n"
+        s!> i!>   |          | "L>" is same as "N"
+        l!>       |          |
+                  |          |
+        S< L< Q<  | Entero   | same as the directives without "<" except
+        s< l< q<  |          | little endian
+        S!< I!<   |          | (available since Ruby 1.9.3)
+        L!<       |          | "S<" is same as "v"
+        s!< i!<   |          | "L<" is same as "V"
+        l!<       |          |
+                  |          |
+        n         | Entero   | 16-bit unsigned, network (big-endian) byte order
+        N         | Entero   | 32-bit unsigned, network (big-endian) byte order
+        v         | Entero   | 16-bit unsigned, VAX (little-endian) byte order
+        V         | Entero   | 32-bit unsigned, VAX (little-endian) byte order
+                  |          |
+        U         | Entero   | UTF-8 character
+        w         | Entero   | BER-compressed integer
     
-     Float        |         |
-     Directive    |         | Meaning
+     Float        |          |
+     Directive    |          | Meaning
      ---------------------------------------------------------------------------
-        D, d      | Flotante| double-precision, native format
-        F, f      | Flotante| single-precision, native format
-        E         | Flotante| double-precision, little-endian byte order
-        e         | Flotante| single-precision, little-endian byte order
-        G         | Flotante| double-precision, network (big-endian) byte order
-        g         | Flotante| single-precision, network (big-endian) byte order
+        D, d      | Flotante | double-precision, native format
+        F, f      | Flotante | single-precision, native format
+        E         | Flotante | double-precision, little-endian byte order
+        e         | Flotante | single-precision, little-endian byte order
+        G         | Flotante | double-precision, network (big-endian) byte order
+        g         | Flotante | single-precision, network (big-endian) byte order
     
-     String       |         |
-     Directive    |         | Meaning
+     String       |          |
+     Directive    |          | Meaning
      ---------------------------------------------------------------------------
-        A         | Cadena  | arbitrary binary string (space padded, count is width)
-        a         | Cadena  | arbitrary binary string (null padded, count is width)
-        Z         | Cadena  | same as ``a'', except that null is added with *
-        B         | Cadena  | bit string (MSB first)
-        b         | Cadena  | bit string (LSB first)
-        H         | Cadena  | hex string (high nibble first)
-        h         | Cadena  | hex string (low nibble first)
-        u         | Cadena  | UU-encoded string
-        M         | Cadena  | quoted printable, MIME encoding (see RFC2045)
-        m         | Cadena  | base64 encoded string (see RFC 2045, count is width)
-                  |         | (if count is 0, no line feed are added, see RFC 4648)
-        P         | Cadena  | pointer to a structure (fixed-length string)
-        p         | Cadena  | pointer to a null-terminated string
+        A         | Cadena   | arbitrary binary string (space padded, count is width)
+        a         | Cadena   | arbitrary binary string (null padded, count is width)
+        Z         | Cadena   | same as ``a'', except that null is added with *
+        B         | Cadena   | bit string (MSB first)
+        b         | Cadena   | bit string (LSB first)
+        H         | Cadena   | hex string (high nibble first)
+        h         | Cadena   | hex string (low nibble first)
+        u         | Cadena   | UU-encoded string
+        M         | Cadena   | quoted printable, MIME encoding (see RFC2045)
+        m         | Cadena   | base64 encoded string (see RFC 2045, count is width)
+                  |          | (if count is 0, no line feed are added, see RFC 4648)
+        P         | Cadena   | pointer to a structure (fixed-length string)
+        p         | Cadena   | pointer to a null-terminated string
     
-     Misc.        |         |
-     Directive    |         | Meaning
+     Misc.        |          |
+     Directive    |          | Meaning
      ---------------------------------------------------------------------------
-        @         | ---     | moves to absolute position
-        X         | ---     | back up a byte
-        x         | ---     | null byte
+        @         | ---      | moves to absolute position
+        X         | ---      | back up a byte
+        x         | ---      | null byte
 :class_methods: 
 - :name: "[]"
   :arglist: "[](*args)"
