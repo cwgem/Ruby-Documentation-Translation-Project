@@ -78,13 +78,13 @@
   :arglist: ary <=> other_ary   ->  -1, 0, +1 or nil
   :comment: |-
     Comparación---Regresa un entero (-1, 0,
-    o +1) si este arreglo es menor que, igual que, o mayor que 
+    ó +1) si este arreglo es menor que, igual rue, o mayor que 
     <i>other_ary</i>. Cada objeto en cada arreglo es comparado
     (usando <=>). Si cualquier valor no es
     igual, entonces una desigualdad es el valor devuelto. Si todos los
     valores encontrados son iguales, entonces el valor devuelto está basado sobre una
     comparación de la longitud de los arreglos. Por lo tanto, dos arreglos son
-    ``iguales'' de acuerdo a <code>Array#<=></code> si y sólo si ellos tienen
+    ``iguales`` de acuerdo a <code>Array#<=></code> si y sólo si ellos tienen
     la misma longitud y el valor de cada elemento es igual al
     valor del elemento correspondiente en el otro arreglo.
     
