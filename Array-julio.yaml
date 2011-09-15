@@ -438,6 +438,11 @@
     ary.product(other_ary, ...)                -> new_ary
     ary.product(other_ary, ...) { |p| block }  -> ary
   :comment: |-
+    Retorna un arreglo de todas las combinaciones de los elementos de todos los arreglos,
+    La longitud del arreglo retornado es producto de la longitud
+    de +self+ y los arreglos argumentos.
+    Si un bloque es dado, el <i>producto</i> arrojará todas las combinaciones
+    y en su lugar retorna +self+.
     Returns an array of all combinations of elements from all arrays,
     The length of the returned array is the product of the length
     of +self+ and the argument arrays.
@@ -453,7 +458,7 @@
 - :name: take
   :arglist: ary.take(n)               -> new_ary
   :comment: |-
-    Returns first n elements from <i>ary</i>.
+    Retorna los primeros elemento n de <i>ary</i>.
     
        a = [1, 2, 3, 4, 5, 0]
        a.take(3)             #=> [1, 2, 3]
@@ -462,18 +467,18 @@
     ary.take_while {|arr| block }   -> new_ary
     ary.take_while                  -> an_enumerator
   :comment: |-
-    Passes elements to the block until the block returns +nil+ or +false+,
-    then stops iterating and returns an array of all prior elements.
-    
-    If no block is given, an enumerator is returned instead.
+    Pasa elementos al bloque hasta que el bloque retorne +nil+ o +false+,
+    luego deja de iterar y retorna un arreglo de todos los elementos previos.
+
+    Si ningún bloque es dado, se devuelve un enumerador en su lugar.
     
        a = [1, 2, 3, 4, 5, 0]
        a.take_while {|i| i < 3 }   #=> [1, 2]
 - :name: drop
   :arglist: ary.drop(n)               -> new_ary
   :comment: |-
-    Drops first n elements from +ary+ and returns the rest of
-    the elements in an array.
+    Bota los primeros n elementos de +ary+ y retorna el resto de
+    los elementos en un arreglo.
     
        a = [1, 2, 3, 4, 5, 0]
        a.drop(3)             #=> [4, 5, 0]
@@ -482,11 +487,11 @@
     ary.drop_while {|arr| block }   -> new_ary
     ary.drop_while                  -> an_enumerator
   :comment: |-
-    Drops elements up to, but not including, the first element for
-    which the block returns +nil+ or +false+ and returns an array
-    containing the remaining elements.
-    
-    If no block is given, an enumerator is returned instead.
+    Bota los elementos hasta, pero sin incluir, el primer elemento para
+    la cual el bloque retorne +self+ o +false+ y retorna un arreglo
+    conteniendo los elementos restante.
+
+    Si ningún bloque es dado, se retorna un enumerador en su lugar.
     
        a = [1, 2, 3, 4, 5, 0]
        a.drop_while {|i| i < 3 }   #=> [3, 4, 5, 0]
