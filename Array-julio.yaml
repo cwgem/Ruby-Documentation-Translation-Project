@@ -431,16 +431,11 @@
     ary.product(other_ary, ...)                -> new_ary
     ary.product(other_ary, ...) { |p| block }  -> ary
   :comment: |-
-    Retorna un arreglo de todas las combinaciones de los elementos de todos los arreglos,
-    La longitud del arreglo retornado es producto de la longitud
-    de +self+ y los arreglos argumentos.
+    Retorna un arreglo de todas las combinaciones de elementos de todos los arreglos,
+    La longitud del arreglo retornado es el producto de la longitud
+    de +self+ por los arreglos de argumento.
     Si un bloque es dado, el <i>producto</i> arrojará todas las combinaciones
     y en su lugar retorna +self+.
-    Returns an array of all combinations of elements from all arrays,
-    The length of the returned array is the product of the length
-    of +self+ and the argument arrays.
-    If given a block, <i>product</i> will yield all combinations
-    and return +self+ instead.
     
        [1,2,3].product([4,5])     #=> [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
        [1,2].product([1,2])       #=> [[1,1],[1,2],[2,1],[2,2]]
@@ -451,7 +446,7 @@
 - :name: take
   :arglist: ary.take(n)               -> new_ary
   :comment: |-
-    Retorna los primeros elemento n de <i>ary</i>.
+    Retorna los primeros n elementos de <i>ary</i>.
     
        a = [1, 2, 3, 4, 5, 0]
        a.take(3)             #=> [1, 2, 3]
