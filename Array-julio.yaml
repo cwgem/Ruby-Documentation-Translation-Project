@@ -515,80 +515,80 @@
     Directivas para +pack+.
     
      Entero       | Arreglo  |
-     Directiva    | Elemento | Meaning
+     Directiva    | Elemento | Significado
      ---------------------------------------------------------------------------
-        C         | Entero   | 8-bit unsigned (unsigned char)
-        S         | Entero   | 16-bit unsigned, native endian (uint16_t)
-        L         | Entero   | 32-bit unsigned, native endian (uint32_t)
-        Q         | Entero   | 64-bit unsigned, native endian (uint64_t)
+        C         | Entero   | 8-bit sin signo (caracter sin signo)
+        S         | Entero   | 16-bit sin signo, endianicidad nativa (uint16_t)
+        L         | Entero   | 32-bit sin signo, endianicidad nativa (uint32_t)
+        Q         | Entero   | 64-bit sin signo, endianicidad nativa (uint64_t)
                   |          |
         c         | Entero   | 8-bit signed (signed char)
-        s         | Entero   | 16-bit signed, native endian (int16_t)
-        l         | Entero   | 32-bit signed, native endian (int32_t)
-        q         | Entero   | 64-bit signed, native endian (int64_t)
+        s         | Entero   | 16-bit signed, endianicidad nativa (int16_t)
+        l         | Entero   | 32-bit signed, endianicidad nativa (int32_t)
+        q         | Entero   | 64-bit signed, endianicidad nativa (int64_t)
                   |          |
-        S_, S!    | Entero   | unsigned short, native endian
-        I, I_, I! | Entero   | unsigned int, native endian
-        L_, L!    | Entero   | unsigned long, native endian
+        S_, S!    | Entero   | sin signo short, endianicidad nativa
+        I, I_, I! | Entero   | sin signo int, endianicidad nativa
+        L_, L!    | Entero   | sin signo long, endianicidad nativa
                   |          |
-        s_, s!    | Entero   | signed short, native endian
-        i, i_, i! | Entero   | signed int, native endian
-        l_, l!    | Entero   | signed long, native endian
+        s_, s!    | Entero   | signed short, endianicidad nativa
+        i, i_, i! | Entero   | signed int, endianicidad nativa
+        l_, l!    | Entero   | signed long, endianicidad nativa
                   |          |
-        S> L> Q>  | Entero   | same as the directives without ">" except
+        S> L> Q>  | Entero   | igual como las directivas sin ">" excepto
         s> l> q>  |          | big endian
         S!> I!>   |          | (available since Ruby 1.9.3)
         L!>       |          | "S>" is same as "n"
         s!> i!>   |          | "L>" is same as "N"
         l!>       |          |
                   |          |
-        S< L< Q<  | Entero   | same as the directives without "<" except
+        S< L< Q<  | Entero   | igual como las directivas sin "<" excepto
         s< l< q<  |          | little endian
-        S!< I!<   |          | (available since Ruby 1.9.3)
+        S!< I!<   |          | (disponible desde Ruby 1.9.3)
         L!<       |          | "S<" is same as "v"
         s!< i!<   |          | "L<" is same as "V"
         l!<       |          |
                   |          |
-        n         | Entero   | 16-bit unsigned, network (big-endian) byte order
-        N         | Entero   | 32-bit unsigned, network (big-endian) byte order
-        v         | Entero   | 16-bit unsigned, VAX (little-endian) byte order
-        V         | Entero   | 32-bit unsigned, VAX (little-endian) byte order
+        n         | Entero   | 16-bit sin signo, red (big-endian) orden de byte 
+        N         | Entero   | 32-bit sin signo, red (big-endian) orden de byte
+        v         | Entero   | 16-bit sin signo, VAX (little-endian) orden de byte
+        V         | Entero   | 32-bit sin signo, VAX (little-endian) orden de byte
                   |          |
-        U         | Entero   | UTF-8 character
-        w         | Entero   | BER-compressed integer
+        U         | Entero   | UTF-8 caracter
+        w         | Entero   | BER-comprimido entero
     
      Float        |          |
-     Directive    |          | Meaning
+     Directiva    |          | Significado
      ---------------------------------------------------------------------------
-        D, d      | Flotante | double-precision, native format
-        F, f      | Flotante | single-precision, native format
-        E         | Flotante | double-precision, little-endian byte order
-        e         | Flotante | single-precision, little-endian byte order
-        G         | Flotante | double-precision, network (big-endian) byte order
-        g         | Flotante | single-precision, network (big-endian) byte order
+        D, d      | Flotante | double-precision, formato nativo
+        F, f      | Flotante | single-precision, formato nativo
+        E         | Flotante | double-precision, little-endian orden de byte
+        e         | Flotante | single-precision, little-endian orden de byte
+        G         | Flotante | double-precision, network (big-endian) orden de byte
+        g         | Flotante | single-precision, network (big-endian) orden de byte
     
      String       |          |
-     Directive    |          | Meaning
+     Directiva    |          | Significado
      ---------------------------------------------------------------------------
-        A         | Cadena   | arbitrary binary string (space padded, count is width)
-        a         | Cadena   | arbitrary binary string (null padded, count is width)
-        Z         | Cadena   | same as ``a'', except that null is added with *
-        B         | Cadena   | bit string (MSB first)
-        b         | Cadena   | bit string (LSB first)
-        H         | Cadena   | hex string (high nibble first)
-        h         | Cadena   | hex string (low nibble first)
+        A         | Cadena   | binario arbitrario string (espacio de relleno, contador es el ancho)
+        a         | Cadena   | binario arbitrario string (null relleno, contador es el ancho)
+        Z         | Cadena   | igual como ``a'', excepto que null es añadido con *
+        B         | Cadena   | bit string (MSB primero)
+        b         | Cadena   | bit string (LSB primero)
+        H         | Cadena   | hex string (cuado alto primero)
+        h         | Cadena   | hex string (cuado bajo primero)
         u         | Cadena   | UU-encoded string
-        M         | Cadena   | quoted printable, MIME encoding (see RFC2045)
-        m         | Cadena   | base64 encoded string (see RFC 2045, count is width)
-                  |          | (if count is 0, no line feed are added, see RFC 4648)
-        P         | Cadena   | pointer to a structure (fixed-length string)
-        p         | Cadena   | pointer to a null-terminated string
+        M         | Cadena   | cita imprimible, codificación MIME (vea RFC2045)
+        m         | Cadena   | codificación string base64 (vea RFC 2045, contador es el ancho)
+                  |          | (si el contador es 0, ninguna línea es agregada, vea RFC 4648)
+        P         | Cadena   | puntero a estructura (string de longitud arreglada)
+        p         | Cadena   | puntero a string terminado en null
     
      Misc.        |          |
-     Directive    |          | Meaning
+     Directiva    |          | Significado
      ---------------------------------------------------------------------------
-        @         | ---      | moves to absolute position
-        X         | ---      | back up a byte
+        @         | ---      | se mueve a una posición absoluta
+        X         | ---      | respalda un byte
         x         | ---      | null byte
 :class_methods: 
 - :name: "[]"
